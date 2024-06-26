@@ -7,35 +7,7 @@
     <title>Prompt Engine</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css">
-    <style>
-        #responseOutput {
-            white-space: pre-wrap;
-            background-color: #f0f0f0;
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 1.2em;
-            color: #333;
-        }
-
-        body {
-            width: 650px;
-            height: 600px;
-        }
-
-        .mde {
-            height: 300px;
-            font-size: 1.2em;
-        }
-
-        .EasyMDEContainer {
-            color: #333;
-        }
-
-        .editor-toolbar, .CodeMirror, .editor-preview, .editor-statusbar {
-            font-size: 1.2em;
-            color: #000;
-        }
-    </style>
+    <link rel="stylesheet" href="style/style.css" />
 </head>
 
 <body>
@@ -59,9 +31,9 @@
         <textarea id="markdown-editor" class="mde"></textarea>
     </main>
 
-    <script src="turndown.min.js"></script>
-    <script src="easymde.min.js"></script>
-    <script src="popup.js"></script>
+    <script src="js/turndown.min.js"></script>
+    <script src="js/easymde.min.js"></script>
+    <script src="js/popup.js"></script>
 
     <script>
         var easyMDE = new EasyMDE({ element: document.getElementById("markdown-editor") });

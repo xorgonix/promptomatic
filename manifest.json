@@ -9,7 +9,7 @@
         "scripting"
     ],
     "background": {
-        "service_worker": "background.js"
+        "service_worker": "js/background.js"
     },
     "action": {
         "default_popup": "popup.html",
@@ -22,7 +22,7 @@
     "content_scripts": [
         {
             "matches": ["https://chat.openai.com/*"],
-            "js": ["content_script.js"]
+            "js": ["js/content_script.js"]
         }
     ],
     "icons": {

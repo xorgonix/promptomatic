@@ -129,7 +129,7 @@ const options = {
     headingStyle: 'atx',
     hr: '---',
     bulletListMarker: '*',
-    codeBlockStyle: 'fenced',
+    codeBlockStyle: 'indented',
     fence: '```',
     emDelimiter: '*',
     strongDelimiter: '**',
