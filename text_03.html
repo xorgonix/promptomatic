@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rich Text to Markdown Converter</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <style>
+        #output {
+            margin-top: 20px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        .prompt-container {
+            margin-bottom: 20px;
+        }
+        .prompt-container textarea {
+            width: 100%;
+        }
+        #richTextInput {
+            border: 1px solid #ccc;
+            padding: 10px;
+            height: 200px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <h1>Rich Text to Markdown Converter</h1>
+        <div id="richTextInput" contenteditable="true" placeholder="Paste your rich text here..."></div>
+        <button onclick="convertToMarkdown()">Convert to Markdown</button>
+        <div id="output"></div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/turndown/7.1.1/turndown.min.js"></script>
+    <script>
+        function convertToMarkdown() {
+            const richTextInput = document.getElementById('richTextInput');
+            const htmlContent = richTextInput.innerHTML;
+
+            // Convert HTML to Markdown using Turndown.js
+            const turndownService = new TurndownService();
+            const markdownText = turndownService.turndown(htmlContent);
+
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = `
+                <div class="prompt-container">
+                    <textarea rows="10">${markdownText}</textarea>
+                    <button onclick="copyToClipboard(this.previousElementSibling)">Copy</button>
+                </div>`;
+        }
+
+        function copyToClipboard(textarea) {
+            textarea.select();
+            document.execCommand('copy');
+            alert('Content copied to clipboard');
+        }
+    </script>
+</body>
+</html>
