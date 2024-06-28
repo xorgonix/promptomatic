@@ -1,16 +1,7 @@
 
-Can you help me understand this presentation better by reformatting it into a report? Please be sure to put the salient point forward. Make the implications of the concepts in the video very apparent and easy to understand.
-
-Please ensure the report;
-
-breaks the document into parts with titles.
-Highlights the most key points,
-Make the implications of the concepts clear,
-Identifies potential risks and opportunities.
 
 
-Additionally, prepare some talking points for me to use at a cocktail party so I have some speaking points :)
-this is the transcript::      there are so many people that are now realizing that they
+there are so many people that are now realizing that they
 all need to build things on the internet so we used to live in an analog world now we live in a digital world what
 you're about to hear is a conversation between me and my friend Nicholas Cole this is Cole's second time on the podcast the first time around we talked
 about five paths to make a million dollars as an online writer or rather as
@@ -1212,4 +1203,41 @@ for watching or listening all the links and resources that we mentioned in the p
 or listening to this if you're listening to this on a podcast platform then do please leave us a review on the iTunes Store it really helps other people
 discover the podcast or if you're watching this in full HD or 4K on YouTube then you can leave a comment down below and ask any questions or any
 insights or any thoughts about the episode that would be awesome and if you enjoyed this episode you might like to check out this episode here as well
-which links in with some of the stuff that we talked about in the episode so thanks for watching uh do hit the Subscribe button if you aren't already
+which links in with some of the stuff that we talked about in the episode so thanks for watching uh do hit the Subscribe button if you aren't already.
+
+Please summarize the above document with the following instructions in mind:
+
+use as many words as you need to cover the key points of the conversation.
+
+use as many sections as you need to organize the information.
+
+Use Heading 1 (Markdown #) for document title.
+Use Heading 2 (Markdown ##) for the main sections.
+Use Heading 3 (Markdown ###) for subsections.
+Provide a final section titled "Takeaways for a Cocktail Party" with Heading 2.
+Ensure that the summary is accurate and covers all the key points of each section.
+
+# Document Title
+# Section 1: [Main Topic]
+an accurate summary of this part of the document
+- Key point 1
+- Key point 2
+
+### Subsection 1.1: [Subtopic]
+an accurate summary of this part of the document
+- Key detail 1
+- Key detail 2
+
+## Section 2: [Next Main Topic]
+an accurate summary of this part of the document
+- Key point 1
+- Key point 2
+
+### Subsection 2.1: [Subtopic]
+an accurate summary of this part of the document
+- Key detail 1
+- Key detail 2
+
+## Takeaways for a Cocktail Party
+- Interesting fact 1 with some context
+- Interesting fact 2 with some context
