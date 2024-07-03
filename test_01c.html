@@ -14,19 +14,43 @@
         .prompt-container {
             margin-bottom: 20px;
         }
+        .scrollable-list {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        .scrollable-list button {
+            display: block;
+            width: 100%;
+            margin: 5px 0;
+            padding: 10px;
+            text-align: left;
+        }
+        #promptDisplay {
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
     <main class="container">
         <h1>Markdown to Prompt Converter</h1>
         <textarea id="markdownInput" placeholder="Paste your markdown text here..." rows="10"></textarea>
+        
+        <div>
+            <label><input type="radio" name="grouping" value="2"> Group by ##</label>
+            <label><input type="radio" name="grouping" value="3" checked> Group by ###</label>
+        </div>
+        
         <button onclick="convertMarkdown()">Convert</button>
         <div id="output"></div>
+        <div id="promptDisplay"></div>
     </main>
 
     <script>
         function convertMarkdown() {
             const input = document.getElementById('markdownInput').value;
+            const grouping = document.querySelector('input[name="grouping"]:checked').value;
             console.log("Original Input:\n", input);
 
             const lines = input.split('\n');
@@ -36,7 +60,7 @@
             let currentKey = '';
             let keys = [];
 
-            const numHashesToBreakOn = 3;  // Set the number of '#' characters to break on
+            const numHashesToBreakOn = parseInt(grouping);  // Get the number of '#' characters to break on
 
             lines.forEach(line => {
                 const headingMatch = line.match(new RegExp(`^#{${numHashesToBreakOn}}\\s+(.*)`));
@@ -70,39 +94,50 @@
             const template = (key) => `
 You are a skilled writer, knowing how to make engaging content that captivates readers. 
 You have a deep understanding of the subject matter and can present it in a clear and concise manner. 
+Your writing is informative, engaging, and persuasive, drawing readers in and keeping them interested throughout. 
+You have a knack for storytelling, weaving together facts and anecdotes to create a compelling narrative. 
+Your writing is polished and professional, showcasing your expertise and authority on the topic. 
+Readers trust your content and look to you for valuable insights and information. 
+Your writing is a reflection of your passion for the subject matter, and it shines through in every word you write.
 
-Right now you will be going through a JSON document and converting it into a text format, node by node. 
-
-Here is the table of contents for the entire document, but i want you to *only deal with the contents of the node entitled*: "${key}",  and any sebsections it contains
-
-DO NOT include material from an earlier of later node in the document
+Today, you will be going through a JSON document and converting it into a text format, node by node. Here is the template we will be using. 
+It represents the Table of Contents (TOC). As you write about each node, be sure to be aware of where you are in the document and let that guide your writing. 
+So, before you start, be sure to keep pertinent information in mind as you write about each node, and don’t overly repeat yourself.
 
 ${reportStructure}
 
-look at this table of contents, and think carefully about what material should be in each part/node of the document, and then confine your output to what is 
-appropriate for the node entitled "${key}".
+For this particular prompt and using well-formed, attractive Markdown, I want you to expand a great deal on the content for the node titled "${key}":
 
-Only use the the node title as the displayed title, as what you will produce will be used in a larger document made up of all the parts of the document.
-
-For this particular prompt and using well-formed, attractive Markdown, I want you to expand  on the content for the node titled "${key}":
-
+${key}
 `;
 
-            let outputHtml = "";
+            let outputHtml = '<div class="scrollable-list">';
+            let prompts = {};
 
             for (const key in outputJson) {
                 if (outputJson.hasOwnProperty(key)) {
-                    const prompt = template(key) + outputJson[key].join('\n');
-                    outputHtml += `
-                    <div class="prompt-container">
-                        <textarea rows="10">${prompt}</textarea>
-                        <button onclick="copyToClipboard(this.previousElementSibling)">Copy</button>
-                    </div>`;
+                    const prompt = template(key) + outputJson[key].join('\n') + "\n======End======\n\n";
+                    prompts[key] = prompt;
+                    outputHtml += `<button onclick="showPrompt('${key}')">${key}</button>`;
                 }
             }
 
-            console.log("Generated Prompts:\n", outputHtml);
+            outputHtml += '</div>';
+            console.log("Generated Prompts:\n", prompts);
             document.getElementById('output').innerHTML = outputHtml;
+
+            window.prompts = prompts; // Store prompts globally to access in showPrompt function
+        }
+
+        function showPrompt(key) {
+            const prompt = window.prompts[key];
+            const promptDisplay = `
+                <div class="prompt-container">
+                    <textarea rows="10">${prompt}</textarea>
+                    <button onclick="copyToClipboard(this.previousElementSibling)">Copy</button>
+                </div>
+            `;
+            document.getElementById('promptDisplay').innerHTML = promptDisplay;
         }
 
         function copyToClipboard(textarea) {

@@ -20,6 +20,12 @@
     <main class="container">
         <h1>Markdown to Prompt Converter</h1>
         <textarea id="markdownInput" placeholder="Paste your markdown text here..." rows="10"></textarea>
+        
+        <div>
+            <label><input type="radio" name="grouping" value="2"> Group by ##</label>
+            <label><input type="radio" name="grouping" value="3" checked> Group by ###</label>
+        </div>
+        
         <button onclick="convertMarkdown()">Convert</button>
         <div id="output"></div>
     </main>
@@ -27,6 +33,7 @@
     <script>
         function convertMarkdown() {
             const input = document.getElementById('markdownInput').value;
+            const grouping = document.querySelector('input[name="grouping"]:checked').value;
             console.log("Original Input:\n", input);
 
             const lines = input.split('\n');
@@ -36,7 +43,7 @@
             let currentKey = '';
             let keys = [];
 
-            const numHashesToBreakOn = 3;  // Set the number of '#' characters to break on
+            const numHashesToBreakOn = parseInt(grouping);  // Get the number of '#' characters to break on
 
             lines.forEach(line => {
                 const headingMatch = line.match(new RegExp(`^#{${numHashesToBreakOn}}\\s+(.*)`));
@@ -73,18 +80,18 @@ You have a deep understanding of the subject matter and can present it in a clea
 
 Right now you will be going through a JSON document and converting it into a text format, node by node. 
 
-Here is the table of contents for the entire document, but i want you to *only deal with the contents of the node entitled*: "${key}",  and any sebsections it contains
+Here is the table of contents for the entire document, but I want you to *only deal with the contents of the node entitled*: "${key}", and any subsections it contains.
 
-DO NOT include material from an earlier of later node in the document
+DO NOT include material from an earlier or later node in the document.
 
 ${reportStructure}
 
-look at this table of contents, and think carefully about what material should be in each part/node of the document, and then confine your output to what is 
+Look at this table of contents, and think carefully about what material should be in each part/node of the document, and then confine your output to what is 
 appropriate for the node entitled "${key}".
 
-Only use the the node title as the displayed title, as what you will produce will be used in a larger document made up of all the parts of the document.
+Only use the node title as the displayed title, as what you will produce will be used in a larger document made up of all the parts of the document.
 
-For this particular prompt and using well-formed, attractive Markdown, I want you to expand  on the content for the node titled "${key}":
+For this particular prompt and using well-formed, attractive Markdown, I want you to expand on the content for the node titled "${key}":
 
 `;
 
