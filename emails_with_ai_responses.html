@@ -1,0 +1,803 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <title>Email Responses</title>
+    <style>
+        .email-box, textarea {
+            width: 100%;
+            height: auto;
+            min-height: 300px; /* This ensures a minimum height but allows the element to grow */
+            overflow: visible; /* Ensure content is visible without scrolling */
+            resize: none; /* Prevent manual resizing */
+            box-sizing: border-box;
+        }
+        .email-box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            white-space: pre-wrap; /* Ensure the text wraps */
+            word-wrap: break-word; /* Ensure long words break correctly */
+        }
+        table {
+            width: 100%;
+        }
+        td, th {
+            width: 50%; /* AI response column width */
+        }
+        td:first-child, th:first-child {
+            width: 37.5%; /* Original email column width */
+        }
+        td:last-child, th:last-child {
+            width: 12.5%; /* Action column width */
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <h1>Email Responses</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Original Email</th>
+                    <th>AI Suggested Response</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td><div class="email-box">Subject: Reservation Inquiry
+Message: Hello, I would like to make a reservation for 4 people at Brewery-Red on Saturday evening. Can you confirm availability? Thanks.</div></td>
+                    <td><textarea>Response to the customer:
+Subject: Re: Reservation Inquiry
+
+Dear [Customer's Name],
+
+Thank you for reaching out to Brewery-Red. We appreciate your interest in dining with us. I am pleased to confirm that we have availability for a reservation for 4 people at Brewery-Red on Saturday evening. 
+
+Please provide us with your full name, contact number, and preferred time for the reservation so that we can secure your booking. 
+
+Looking forward to having you and your party join us for an enjoyable evening!
+
+Best regards,
+[Your Name]
+[Restaurant/Brewery Name]
+</textarea></td>
+                    <td><button>Send</button></td>
+                </tr>
+    
+                <tr>
+                    <td><div class="email-box">Subject: Menu Request
+Message: Hi, could you please send me the current menu for The Barn? I have some dietary restrictions and want to check my options. Thank you.</div></td>
+                    <td><textarea>Response to the customer:
+
+Subject: Re: Menu Request for The Barn
+
+Hi [Customer's Name],
+
+Thank you for reaching out to us. We appreciate your interest in dining at The Barn. I have attached the current menu for your reference. Please let us know if you have any specific dietary restrictions so that we can assist you in choosing suitable options.
+
+If you have any further questions or require assistance, feel free to contact us.
+
+We look forward to serving you at The Barn.
+
+Best regards,
+[Your Name]
+The Barn Team
+
+Type: Inquiry
+Action: Send menu</textarea></td>
+                    <td><button>Send</button></td>
+                </tr>
+    
+                <tr>
+                    <td><div class="email-box">Subject: Complaint about Service
+Message: Hello, I visited Tanksters last night and was disappointed with the service. The staff were slow and inattentive. Can someone address this issue?</div></td>
+                    <td><textarea>Response to the Customer:
+
+Subject: Apology for Your Recent Experience at Tanksters
+
+Dear [Customer's Name],
+
+I am sorry to hear about your disappointing experience at Tanksters last night. Your feedback is truly valuable to us, and we deeply apologize for any inconvenience caused by our slow and inattentive service.
+
+We take complaints like yours seriously, and I assure you that we are addressing this matter internally to ensure that such incidents do not reoccur in the future. Our commitment to providing excellent service to our customers is unwavering, and we appreciate you bringing this to our attention.
+
+Please let us know if there is anything specific you would like us to do to make up for your negative experience. Your satisfaction is our top priority, and we are here to assist you in any way we can.
+
+Thank you for taking the time to share your feedback with us. We hope to have the opportunity to serve you again and provide you with a much-improved experience.
+
+Warm regards,
+
+[Your Name]
+[Your Position]
+Tanksters Brewery/Restaurant
+
+Type: Customer Complaint
+Action: Internal investigation and improvement of service; Open to making amends as per customer's request.</textarea></td>
+                    <td><button>Send</button></td>
+                </tr>
+    
+                <tr>
+                    <td><div class="email-box">Subject: Job Application
+Message: Hi, are you currently hiring at The Barn? I am interested in a server position and have 3 years of experience. Attached is my resume. Regards, Lisa.</div></td>
+                    <td><textarea>1. Response to the customer:
+Subject: Re: Job Application at The Barn
+
+Hi Lisa,
+
+Thank you for your interest in joining The Barn team. We are always on the lookout for talented individuals like yourself. Could you please provide us with some additional information such as your availability and preferred work schedule?
+
+Looking forward to hearing back from you soon.
+
+Best regards,
+[Your Name]
+[Position]
+The Barn
+
+2. Type: Job Application
+3. Action: Schedule an interview or request more information from Lisa.</textarea></td>
+                    <td><button>Send</button></td>
+                </tr>
+    
+                <tr>
+                    <td><div class="email-box">Subject: Event Booking
+Message: Good day, I am looking to book a private event at Brewery-Red for about 20 people. Can you provide details on availability and pricing?</div></td>
+                    <td><textarea>Response to the customer:
+Subject: Re: Event Booking at Brewery-Red
+
+Hi [Customer's Name],
+
+Thank you for considering Brewery-Red for your private event! We would be delighted to host your group of 20 people. Please provide us with the date and time you are looking to book the event so we can check availability for you.
+
+Regarding pricing and further details, we offer various packages tailored to meet different needs. Once we have the date details, we can share more information with you. 
+
+Please feel free to reach out with any additional questions or specific requirements you may have.
+
+Looking forward to hosting your event at Brewery-Red!
+
+Warm Regards,
+[Your Name]
+Brewery-Red Team
+
+Type: Event Booking Inquiry
+Action: Check availability based on provided date and time, share pricing information and event package details.</textarea></td>
+                    <td><button>Send</button></td>
+                </tr>
+    
+                <tr>
+                    <td><div class="email-box">Subject: Gift Card Purchase
+Message: Hi, I would like to purchase a gift card for Tanksters. Can you tell me how to proceed with this? Thanks.</div></td>
+                    <td><textarea>Response to the customer:
+
+Subject: Re: Gift Card Purchase
+
+Hi there,
+
+Thank you for reaching out to us about purchasing a gift card for Tanksters! To proceed with this, you have a couple of options available. You can either visit our brewery/restaurant in person and buy the gift card directly from the hostess at the front desk, or you can purchase a gift card online through our website.
+
+If you prefer to buy the gift card online, you can go to our website and navigate to the "Gift Cards" section where you can select the desired amount and make the purchase. The gift card can then be either emailed to you or directly to the recipient.
+
+Please let us know if you need any further assistance with this process. We appreciate your support!
+
+Best regards,
+[Your Name]
+Tanksters Brewery/Restaurant
+
+Type: Gift Card Purchase
+Action: Provide instructions on how to purchase a gift card either in person or online.</textarea></td>
+                    <td><button>Send</button></td>
+                </tr>
+    
+                <tr>
+                    <td><div class="email-box">Subject: Brewery Tour Inquiry
+Message: Hello, I am interested in taking a tour of Brewery-Red. Do you offer tours, and if so, what are the timings and cost?</div></td>
+                    <td><textarea>Response to the customer:
+Subject: Brewery Tour Information
+
+Dear (Customer's Name),
+
+Thank you for your interest in Brewery-Red! We're thrilled to hear that you would like to take a tour of our brewery. Yes, we do offer tours for visitors to experience our brewing process and sample our craft beers.
+
+Our brewery tours are available on [insert available days and timings]. The cost for the tour is [include pricing details]. 
+
+If you would like to book a tour or have any more questions, please feel free to reach out to us at [contact information].
+
+We look forward to welcoming you to Brewery-Red and providing you with an enjoyable brewery tour experience.
+
+Cheers,
+[Your Name]
+[Position]
+Brewery-Red
+
+Type: Inquiry
+Action: Provide tour details and pricing, offer to assist with booking or further inquiries.</textarea></td>
+                    <td><button>Send</button></td>
+                </tr>
+    
+                <tr>
+                    <td><div class="email-box">Subject: Lost Item
+Message: Hi, I left my jacket at The Barn last night. Has it been found? It’s a black leather jacket. Please let me know. Thank you.</div></td>
+                    <td><textarea>Response to the customer:
+
+Subject: Lost Item
+
+Dear Customer,
+
+Thank you for reaching out to us about your lost jacket. We will immediately check our lost and found section to see if your black leather jacket has been found. We will get back to you as soon as possible to let you know if we have located your item. 
+
+If you have any further questions or concerns, please feel free to contact us.
+
+Best regards,
+
+[Your Name]
+The Barn Customer Service Team</textarea></td>
+                    <td><button>Send</button></td>
+                </tr>
+    
+                <tr>
+                    <td><div class="email-box">Subject: Feedback on Food
+Message: Good evening, I recently dined at Tanksters and wanted to give feedback on the food. The burger was excellent, but the fries were cold. Overall, a good experience. Best, Mark.</div></td>
+                    <td><textarea>Response to the Customer:
+
+Subject: Re: Feedback on Food
+
+Hi Mark,
+
+Thank you for taking the time to provide feedback on your recent dining experience at Tanksters. We're thrilled to hear that you enjoyed the burger, but we apologize that the fries were not up to standard during your visit. Your feedback is valuable to us and will be shared with our kitchen team to ensure that we maintain our food quality consistently.
+
+We appreciate your kind words and are glad that overall you had a good experience with us. If there's anything else you'd like to share or if you have any further feedback, please feel free to reach out. We hope to welcome you back soon for another positive dining experience.
+
+Best regards,
+[Your Name]
+Tanksters Customer Relations Team</textarea></td>
+                    <td><button>Send</button></td>
+                </tr>
+    
+                <tr>
+                    <td><div class="email-box">Subject: Special Dietary Needs
+Message: Hi, I have a gluten allergy and plan to visit The Barn. Can you accommodate gluten-free meals? Please advise. Thanks.</div></td>
+                    <td><textarea>Response to the customer:
+Subject: Re: Special Dietary Needs
+
+Dear Customer,
+
+Thank you for reaching out to us regarding your gluten allergy. We are pleased to inform you that we do offer gluten-free meal options at The Barn. Our menu includes a variety of dishes that can be prepared without gluten ingredients to accommodate your dietary needs.
+
+When you visit us, please inform your server about your allergy, and they will be happy to guide you through the menu and assist you in selecting suitable options. If you have any specific preferences or requirements, feel free to let us know in advance so that we can ensure your dining experience is enjoyable and safe.
+
+We look forward to welcoming you at The Barn and providing you with a delicious gluten-free meal. If you have any more questions or need further assistance, please do not hesitate to contact us.
+
+Best regards,
+
+[Your Name]
+[Your Position]
+The Barn
+
+Type: Inquiry
+Action: Provide information on gluten-free meal options and assure the customer of accommodation for their dietary needs.</textarea></td>
+                    <td><button>Send</button></td>
+                </tr>
+    
+                <tr>
+                    <td><div class="email-box">Subject: Reservation Inquiry
+Message: Hello, I would like to make a reservation for 4 people at Brewery-Red on Saturday evening. We are celebrating a special occasion and would love to have a table with a nice view if possible. Can you confirm availability and let me know if there are any special arrangements you can provide for birthdays? Thanks in advance!</div></td>
+                    <td><textarea>Response to the customer:
+Subject: Re: Reservation Inquiry
+
+Hello [Customer's Name],
+
+Thank you for considering Brewery-Red for your special occasion celebration. We would be delighted to accommodate your reservation for 4 people on Saturday evening. We will do our best to secure a table with a nice view for your group.
+
+We have noted that you are celebrating a special occasion. Let us know if you would like any specific arrangements or if there are any dietary preferences we should be aware of.
+
+Please confirm your reservation by replying to this email or give us a call at [Brewery-Red's phone number] if you have any additional requests or questions. We look forward to hosting you and making your celebration memorable.
+
+Thank you and cheers! 
+
+Best regards,
+[Brewery-Red Team]
+  
+Type: Reservation
+Action: Confirm reservation and inquire about any specific arrangements for the birthday celebration</textarea></td>
+                    <td><button>Send</button></td>
+                </tr>
+    
+                <tr>
+                    <td><div class="email-box">Subject: Menu Request
+Message: Hi, could you please send me the current menu for The Barn? I have some dietary restrictions, specifically I am gluten-intolerant and lactose-intolerant, and I want to check my options before visiting. If you have any recommendations for gluten-free and dairy-free dishes, that would be greatly appreciated. Thank you so much for your assistance.</div></td>
+                    <td><textarea>Response to the customer:
+Subject: The Barn Menu and Dietary Options
+
+Dear [Customer Name],
+
+Thank you for reaching out to us. We appreciate your interest in dining at The Barn. Attached, you will find our current menu which includes various gluten-free and dairy-free options to accommodate your dietary restrictions. 
+
+Should you have any further questions or require additional assistance, please do not hesitate to contact us. We look forward to welcoming you to The Barn and providing you with a delightful dining experience.
+
+Warm regards,
+[Your Name]
+The Barn Team
+
+Type: Menu Request
+Action: Send current menu with gluten-free and dairy-free options.</textarea></td>
+                    <td><button>Send</button></td>
+                </tr>
+    
+                <tr>
+                    <td><div class="email-box">Subject: Complaint about Service
+Message: Hello, I visited Tanksters last night with a group of friends and was disappointed with the service we received. The staff were slow and inattentive, and our orders were mixed up multiple times. Additionally, it took an unusually long time to get our drinks, and when they arrived, they were not prepared correctly. I hope you can address this issue to improve the experience for future customers.</div></td>
+                    <td><textarea>Response to the customer:
+
+Subject: Apology for Your Recent Experience at Tanksters
+
+Dear [Customer's Name],
+
+Thank you for reaching out to us and sharing your feedback about the service you received during your visit to Tanksters. We sincerely apologize for the disappointing experience you had with our staff and the service provided.
+
+We are truly sorry for the mix-ups with your orders, the delay in serving your drinks, and the lack of attention you and your friends experienced. This does not reflect the high standards of service we strive to provide to all our customers. Rest assured, your concerns have been noted, and we are taking immediate steps to address these issues to ensure that future customers do not encounter similar problems.
+
+We value your feedback as it helps us to improve and deliver a better dining experience. Please accept our apologies once again, and we would like to invite you back to Tanksters as our guest to make amends for your disappointing visit. We will ensure that your next experience with us is nothing short of exceptional.
+
+Thank you for bringing this matter to our attention, and we hope to have the opportunity to restore your faith in Tanksters.
+
+Best Regards,
+
+[Your Name]
+Tanksters Management Team</textarea></td>
+                    <td><button>Send</button></td>
+                </tr>
+    
+                <tr>
+                    <td><div class="email-box">Subject: Job Application
+Message: Hi, are you currently hiring at The Barn? I am interested in a server position and have 3 years of experience in the hospitality industry. I am passionate about providing excellent customer service and have a strong work ethic. Attached is my resume and cover letter. I look forward to the possibility of joining your team. Regards, Lisa.</div></td>
+                    <td><textarea>1. Response to the customer:
+Dear Lisa,
+
+Thank you for your interest in joining our team at The Barn. We appreciate your application for a server position and your experience in the hospitality industry. We will review your resume and cover letter carefully and get back to you as soon as possible.
+
+Best regards,
+[Your Name]
+[Your Position]
+The Barn
+
+2. Type: Job Application
+3. Action: Review the attached resume and cover letter, process the application, and schedule an interview if suitable candidates are identified.</textarea></td>
+                    <td><button>Send</button></td>
+                </tr>
+    
+                <tr>
+                    <td><div class="email-box">Subject: Event Booking
+Message: Good day, I am looking to book a private event at Brewery-Red for about 20 people to celebrate a company milestone. Could you provide details on availability, pricing, and the menu options for a group of this size? Additionally, we would like to know if there are any special packages or discounts available for corporate events. Thank you for your time and assistance.</div></td>
+                    <td><textarea>Response to the customer:
+Subject: Re: Event Booking at Brewery-Red
+
+Dear [Customer's Name],
+
+Thank you for considering Brewery-Red for your upcoming private event to celebrate your company milestone with a group of about 20 people! We appreciate your interest in hosting your event with us.
+
+We are excited to provide you with the details you requested. Our team will check our availability for the date of your event and get back to you shortly with pricing options, menu choices suitable for your group size, as well as any special packages or discounts available for corporate events.
+
+Should you have any specific preferences or additional requests, please feel free to let us know, and we will do our best to accommodate them.
+
+Thank you for reaching out to us, and we look forward to assisting you further in planning your special event!
+
+Warm regards,
+[Your Name]
+Brewery-Red Team
+
+Type: Event Booking
+Action: Provide availability, pricing, menu options, and details on special packages or discounts for corporate events.</textarea></td>
+                    <td><button>Send</button></td>
+                </tr>
+    
+                <tr>
+                    <td><div class="email-box">Subject: Gift Card Purchase
+Message: Hi, I would like to purchase a gift card for Tanksters as a birthday present for a friend. Could you please let me know the denominations available and the process for purchasing one? Is it possible to buy a digital gift card online, or do I need to visit the restaurant in person? Thank you for your help.</div></td>
+                    <td><textarea>Response to the customer:
+
+Subject: Re: Gift Card Purchase
+
+Hi [Customer's Name],
+
+Thank you for your interest in purchasing a gift card for Tanksters! We offer gift cards in various denominations to suit your preference. You can purchase a digital gift card online through our website by selecting the desired amount and completing the checkout process. Alternatively, you are welcome to visit our brewery/restaurant in person to buy a physical gift card.
+
+If you have any further questions or need assistance with the purchase, feel free to reach out. We'll be happy to help.
+
+Cheers,
+[Your Name]
+Tanksters Customer Service Team</textarea></td>
+                    <td><button>Send</button></td>
+                </tr>
+    
+                <tr>
+                    <td><div class="email-box">Subject: Brewery Tour Inquiry
+Message: Hello, I am interested in taking a tour of Brewery-Red with a group of friends. Do you offer guided tours, and if so, what are the timings and cost? We are particularly interested in learning about the brewing process and sampling some of your beers. Any additional information about the tour would be appreciated. Thank you.</div></td>
+                    <td><textarea>Response to the customer:
+
+Subject: Brewery Tour Information
+
+Hello,
+
+Thank you for your interest in taking a tour of Brewery-Red with your friends. We are delighted to offer guided tours that will provide you with an in-depth experience of our brewery.
+
+Our guided tours cover the brewing process and include beer sampling sessions. The tour timings are [insert timings here], and the cost per person is [insert cost here]. Please note that tours need to be booked in advance to ensure availability.
+
+For further details and to make a reservation, please contact us at [insert contact details]. We look forward to welcoming you and your friends for an enjoyable brewery tour.
+
+Best regards,
+
+[Your Name]
+[Brewery-Red Team]
+
+Type: Inquiry
+Action: Provide information on tour timings, cost, booking process, and contact details.</textarea></td>
+                    <td><button>Send</button></td>
+                </tr>
+    
+                <tr>
+                    <td><div class="email-box">Subject: Lost Item
+Message: Hi, I left my jacket at The Barn last night and I am hoping it has been found. It’s a black leather jacket with a silver zipper and some distinctive stitching on the back. I would really appreciate it if you could check your lost and found and let me know if it has been turned in. Thank you for your assistance.</div></td>
+                    <td><textarea>Response to the customer:
+Subject: Re: Lost Item - Black Leather Jacket
+
+Dear [Customer's Name],
+
+Thank you for reaching out about your lost jacket. We have checked our lost and found and are happy to inform you that your black leather jacket with the silver zipper and distinctive stitching on the back has been located and securely kept aside for you.
+
+You can come by The Barn at your convenience to pick up your jacket. If you are unable to make it in person, please let us know, and we can discuss alternative arrangements for returning your jacket to you.
+
+We apologize for any inconvenience this may have caused and appreciate your patronage. Please do not hesitate to contact us if you have any further questions or require assistance.
+
+Thank you for choosing The Barn, and we look forward to reuniting you with your jacket soon.
+
+Warm regards,
+
+[Your Name]
+The Barn Management
+
+Type: Lost Item Query
+Action: Found the jacket and informed the customer.</textarea></td>
+                    <td><button>Send</button></td>
+                </tr>
+    
+                <tr>
+                    <td><div class="email-box">Subject: Feedback on Food
+Message: Good evening, I recently dined at Tanksters and wanted to provide some feedback on the food. The burger I ordered was excellent, very juicy and flavorful, but the fries were unfortunately cold and lacked seasoning. Overall, it was a good experience, but I hope the kitchen can address the issue with the fries to ensure all elements of the meal are served at the same high standard. Best, Mark.</div></td>
+                    <td><textarea>Response to the Customer Email:  
+Subject: Re: Feedback on Food  
+Dear Mark,  
+
+Thank you for taking the time to provide us with your feedback following your recent visit to Tanksters. We are pleased to hear that you enjoyed the burger you ordered; it's always great to know when our guests are satisfied with their meals.  
+
+However, we are sorry to learn that the fries did not meet expectations during your visit. Please accept our sincerest apologies for the oversight. We have addressed this issue with our kitchen team to ensure that all aspects of our meals are served at the high standard we aim for.  
+
+We greatly appreciate your feedback as it helps us to improve and deliver a better dining experience for all our guests. We hope to have the opportunity to welcome you back soon and provide you with an even more enjoyable visit.  
+
+Thank you once again for sharing your thoughts.  
+
+Best regards,  
+[Your Name]  
+Tanksters Management Team</textarea></td>
+                    <td><button>Send</button></td>
+                </tr>
+    
+                <tr>
+                    <td><div class="email-box">Subject: Special Dietary Needs
+Message: Hi, I have a gluten allergy and am planning to visit The Barn with some friends. Can you accommodate gluten-free meals? If so, could you please provide me with a list of gluten-free options available on your menu? It would be very helpful to know in advance to ensure I can enjoy my meal without any concerns. Thanks for your understanding and assistance.</div></td>
+                    <td><textarea>Response to the customer:
+
+Subject: Re: Special Dietary Needs
+
+Hi [Customer's Name],
+
+Thank you for reaching out to us with your special dietary needs. We are happy to accommodate gluten-free options at The Barn and ensure you have a worry-free dining experience with us. 
+
+I have attached a list of our gluten-free menu options for your review. If you have any specific preferences or requirements, please let us know so we can make your visit as enjoyable as possible. 
+
+We look forward to welcoming you and your friends at The Barn soon. If you require any further assistance or have additional questions, feel free to contact us.
+
+Warm regards,
+
+[Your Name]
+The Barn
+
+Type: Inquiry
+Action: Provide gluten-free menu options</textarea></td>
+                    <td><button>Send</button></td>
+                </tr>
+    
+                <tr>
+                    <td><div class="email-box">Subject: Live Music Schedule
+Message: Hello, I heard that Brewery-Red often hosts live music events and I am very interested in attending. Could you provide me with the upcoming schedule for live music performances? Additionally, do you offer any special deals or packages for these events? I would love to plan a visit around one of your music nights. Thank you!</div></td>
+                    <td><textarea>Response to the customer:
+Subject: Re: Live Music Schedule
+
+Hi [Customer's Name],
+
+Thank you for your interest in our live music events at Brewery-Red! We are thrilled to hear that you are keen on attending our performances. Currently, our upcoming live music schedule includes:
+
+- Date 1: Band/Artist Name, Time
+- Date 2: Band/Artist Name, Time
+- Date 3: Band/Artist Name, Time
+
+We also offer special deals and packages for our music nights. These can include discounted drink specials or food promotions. I recommend checking our website for more detailed information on the specific deals available for each event.
+
+We would be delighted to have you join us for one of our music nights. Please let us know if you'd like to make a reservation or if you need any further information. We look forward to welcoming you to Brewery-Red soon!
+
+Cheers,
+
+[Your Name]
+Brewery-Red Team
+
+Type: Inquiry
+Action: Provide upcoming live music schedule and details on special deals/ packages</textarea></td>
+                    <td><button>Send</button></td>
+                </tr>
+    
+                <tr>
+                    <td><div class="email-box">Subject: Birthday Celebration
+Message: Hi, I am planning a birthday celebration for a friend at Tanksters and wanted to inquire about any special arrangements or packages you offer for such events. We are a group of about 10 people and would love to have a memorable experience. Please let me know what options are available. Thank you.</div></td>
+                    <td><textarea>Response to the customer:
+Subject: Re: Birthday Celebration at Tanksters
+
+Hi [Customer's Name],
+
+Thank you for considering Tanksters for your friend's birthday celebration! We are thrilled to hear about your upcoming event and would be happy to help make it a memorable experience for you and your group.
+
+We offer special arrangements and packages for events like birthdays, and we can certainly accommodate your group of around 10 people. To provide you with the best options available, could you please let us know the date and time you are considering for the celebration?
+
+Once we have that information, we can discuss the packages we offer, such as reserved seating areas, customized menus, drink specials, and any other special arrangements you may require.
+
+Please feel free to reach out with any additional preferences or questions you may have; we are here to ensure your friend's birthday celebration is fantastic!
+
+Looking forward to celebrating with you,
+
+Tanksters Team
+
+Type: Inquiry
+Action: Provide information on birthday celebration packages and special arrangements</textarea></td>
+                    <td><button>Send</button></td>
+                </tr>
+    
+                <tr>
+                    <td><div class="email-box">Subject: Catering Services
+Message: Good day, I am interested in your catering services for an upcoming family reunion. We are expecting around 50 guests and would like to know if you provide catering for such events. If so, could you please send me a menu and pricing details? We would like a variety of dishes to accommodate different tastes and dietary needs. Thank you.</div></td>
+                    <td><textarea>Response to the customer:
+
+Subject: Re: Catering Services for Family Reunion
+
+Dear [Customer's Name],
+
+Thank you for reaching out to us regarding catering services for your upcoming family reunion. We are thrilled to hear about your event and would be delighted to cater for you. We do offer catering services for events like yours, and we can accommodate around 50 guests.
+
+I will have our catering manager send you a detailed menu along with pricing options to suit your needs. We understand the importance of catering to different tastes and dietary requirements, so we will ensure a variety of dishes are available for your event.
+
+If you could kindly provide us with any specific dietary preferences or restrictions, it would help us tailor the menu to your requirements. Please feel free to let us know of any special requests you may have.
+
+We look forward to working with you to make your family reunion a memorable and delicious occasion. Should you have any further questions or need additional information, please do not hesitate to contact us.
+
+Thank you for considering [Brewery/Restaurant's Name] for your catering needs.
+
+Warm regards,
+
+[Your Name]
+[Your Title]
+[Brewery/Restaurant's Name]
+
+Type: Inquiry
+Action: Provide menu and pricing details, accommodate dietary needs</textarea></td>
+                    <td><button>Send</button></td>
+                </tr>
+    
+                <tr>
+                    <td><div class="email-box">Subject: Beer Recommendations
+Message: Hello, I recently visited Brewery-Red and enjoyed a few of your beers. I was particularly fond of one of the IPAs but can't recall the name. Could you provide me with a list of your current IPA offerings and recommend a few that have a similar flavor profile? I would love to purchase some for home. Thanks!</div></td>
+                    <td><textarea>Response to the customer:
+
+Subject: Re: Beer Recommendations
+
+Dear [Customer's Name],
+
+Thank you for reaching out and for your kind words about your recent visit to Brewery-Red. We're thrilled to hear that you enjoyed our IPAs! While we would need a bit more information to pinpoint the exact IPA you tried, I've provided a list of our current IPA offerings below. Additionally, I've recommended a few that share a similar flavor profile to the one you enjoyed:
+
+1. [IPA Name 1]
+2. [IPA Name 2]
+3. [IPA Name 3]
+
+If you can remember any specific details about the IPA you liked, such as its hop varieties or tasting notes, please let us know so we can further tailor our recommendations to your preferences.
+
+Feel free to visit or contact us if you have any more questions or if you'd like to purchase any of our IPAs for home. We appreciate your support and look forward to assisting you further.
+
+Cheers,
+[Your Name]
+Brewery-Red
+
+Type: Inquiry
+Action: Provide information on current IPA offerings and suggest similar flavor profile options</textarea></td>
+                    <td><button>Send</button></td>
+                </tr>
+    
+                <tr>
+                    <td><div class="email-box">Subject: Private Party Inquiry
+Message: Hi, I am organizing a private party for a group of colleagues and am considering Tanksters as the venue. Could you provide information on booking a private area, the available food and drink packages, and any additional services you offer for such events? We are aiming for a relaxed and enjoyable atmosphere. Thank you.</div></td>
+                    <td><textarea>Response to the customer:
+Hi [Customer's Name],
+
+Thank you for considering Tanksters as the venue for your private party. We're excited to help you organize a memorable event for you and your colleagues. 
+
+Regarding your inquiry, we do offer private party options that can cater to your group. Our private areas can accommodate various group sizes and we have food and drink packages available to suit your preferences. Additionally, we provide a range of additional services to enhance your event and create a relaxed and enjoyable atmosphere.
+
+To provide you with more detailed information and discuss your specific needs, could you please let us know the date of your event, estimated number of guests, and any specific requirements you may have?
+
+We look forward to assisting you with your private party planning at Tanksters. Please feel free to reach out to us with any further questions or to discuss your event in more detail.
+
+Best regards,
+[Your Name]
+Tanksters Brewery/Restaurant
+
+Type: Private Party Inquiry
+Action: Provide detailed information on private area booking, food and drink packages, and additional services for private events.</textarea></td>
+                    <td><button>Send</button></td>
+                </tr>
+    
+                <tr>
+                    <td><div class="email-box">Subject: Accessibility Information
+Message: Hello, I am planning to visit The Barn with a family member who uses a wheelchair. Could you please provide information on the accessibility of your restaurant? Are there ramps, accessible restrooms, and suitable seating options available? Your assistance in ensuring we have a comfortable visit would be greatly appreciated. Thank you.</div></td>
+                    <td><textarea>Response to the Customer:
+
+Subject: Re: Accessibility Information
+
+Dear [Customer's Name],
+
+Thank you for reaching out to us and for considering The Barn for your upcoming visit. We understand the importance of ensuring a comfortable experience for all our guests, including those with accessibility needs.
+
+I'm pleased to inform you that The Barn is equipped with ramps for wheelchair access, accessible restrooms, and suitable seating options to accommodate your family member's needs. Our goal is to make your visit as enjoyable and convenient as possible.
+
+Please let us know if you require any further assistance or have specific requests to enhance your experience with us. We look forward to welcoming you and your family member to The Barn and providing you with a memorable dining experience.
+
+Should you have any other questions or need additional information, feel free to contact us at [Restaurant's Contact Information].
+
+Warm regards,
+
+[Your Name]  
+[Your Title]  
+The Barn Team  
+[Restaurant's Contact Information]  
+</textarea></td>
+                    <td><button>Send</button></td>
+                </tr>
+    
+                <tr>
+                    <td><div class="email-box">Subject: Seasonal Beers
+Message: Hi, I am a big fan of seasonal beers and wanted to inquire if Brewery-Red has any special brews for the upcoming fall season. I am particularly interested in pumpkin ales or other unique seasonal flavors. Could you provide a list of what will be available and when? Thank you for your time.</div></td>
+                    <td><textarea>Response to the customer:
+Subject: Re: Seasonal Beers
+
+Hi [Customer's Name],
+
+Thank you for reaching out to us! We're thrilled to hear about your interest in our seasonal beers. At Brewery-Red, we have some exciting special brews lined up for the upcoming fall season, including pumpkin ales and other unique flavors.
+
+I'll be happy to provide you with a list of the seasonal beers that will be available and their release dates. I just need a little time to gather the information for you. Please expect to hear back from me shortly with the details you requested.
+
+If you have any more questions or need further assistance, feel free to let me know. Thank you for thinking of Brewery-Red, and we look forward to sharing our fall brews with you!
+
+Best regards,
+
+[Your Name]
+Brewery-Red Team
+
+Type: Inquiry
+Action: Provide a list of available seasonal beers and their release dates.</textarea></td>
+                    <td><button>Send</button></td>
+                </tr>
+    
+                <tr>
+                    <td><div class="email-box">Subject: Vegan Options
+Message: Hello, I am planning a visit to Tanksters with a group of friends, and one of us is vegan. Could you please let me know if you have vegan options on your menu or if any dishes can be modified to be vegan? It would help us plan our visit better knowing what is available. Thank you very much.</div></td>
+                    <td><textarea>Response to the customer:
+
+Subject: Re: Vegan Options at Tanksters
+
+Hi [Customer's Name],
+
+Thank you for reaching out and considering Tanksters for your upcoming visit with your friends. We appreciate your inquiry about vegan options on our menu.
+
+I'm pleased to inform you that we do offer vegan options at Tanksters. Our menu includes several dishes that are either already vegan or can be modified to suit vegan preferences. Our kitchen staff is also happy to accommodate any dietary restrictions or preferences to ensure all guests have a delightful dining experience.
+
+If you have any specific dietary requirements or would like more information about our vegan options, please let us know, and we'll be more than happy to assist you.
+
+We look forward to welcoming you and your friends to Tanksters soon.
+
+Best regards,
+
+[Your Name]
+Tanksters Customer Service 
+
+Type: Inquiry
+Action: Provide information on vegan options and offer assistance with dietary preferences</textarea></td>
+                    <td><button>Send</button></td>
+                </tr>
+    
+                <tr>
+                    <td><div class="email-box">Subject: Event Sponsorship
+Message: Hi, I am organizing a community event in Kingston and am seeking local businesses to sponsor or participate. Would Brewery-Red be interested in sponsoring our event or providing some of your products for a tasting session? Any support would be greatly appreciated and we would promote your business as a partner in all our materials. Thank you for considering this request.</div></td>
+                    <td><textarea>Response to the Customer:
+Subject: Re: Event Sponsorship Opportunity
+
+Dear [Customer's Name],
+
+Thank you for reaching out to Brewery-Red with your event sponsorship opportunity. We appreciate your interest in involving our brewery and products in your community event in Kingston. 
+
+We are thrilled to support local initiatives and would love to discuss the details further. Could you please provide us with more information regarding the event date, location, and the level of sponsorship you are looking for? Additionally, let us know how you envision Brewery-Red's involvement in the event and what products you are interested in featuring for the tasting session.
+
+Please feel free to contact us at [Brewery-Red's contact information] so that we can explore this opportunity and see how we can best contribute to your event. We look forward to the possibility of collaborating with you and being a part of this exciting community event.
+
+Thank you once again for considering us as a potential sponsor. We are eager to hear more about your event and how we can support it.
+
+Best regards,
+[Your Name]
+Brewery-Red Team
+
+Type: Sponsorship Inquiry
+Action: Further discussion of event details and potential collaboration</textarea></td>
+                    <td><button>Send</button></td>
+                </tr>
+    
+                <tr>
+                    <td><div class="email-box">Subject: Wine List
+Message: Hi, I am planning to visit The Barn and wanted to know if you have a wine list available. Could you please send me the current wine list or let me know if there are any special wines you would recommend? We are looking to have a nice dinner with a good bottle of wine. Thank you.</div></td>
+                    <td><textarea>Response to the customer:
+Subject: Re: Wine List at The Barn
+
+Dear [Customer's Name],
+
+Thank you for reaching out to us at The Barn. We are delighted to hear about your upcoming visit and interest in our wine selection. We have an extensive wine list featuring a variety of options that we believe will complement your dining experience.
+
+To assist you in selecting the perfect bottle of wine for your dinner, I have attached our current wine list to this email. Please feel free to review it and let us know if you have any specific preferences or if you would like any recommendations from our team.
+
+If you have any further questions or require additional assistance, please do not hesitate to contact us. We look forward to hosting you at The Barn and ensuring you have a wonderful dining experience with us.
+
+Warm regards,
+
+[Your Name]
+[Title/Position]
+The Barn Brewery/Restaurant
+
+Type: Inquiry
+Action: Send wine list and provide wine recommendations as requested.</textarea></td>
+                    <td><button>Send</button></td>
+                </tr>
+    
+                <tr>
+                    <td><div class="email-box">Subject: Trivia Night
+Message: Hello, I heard that Tanksters hosts trivia nights and would love to participate with my friends. Could you provide details on the schedule for trivia nights, the rules, and any prizes that are awarded? We are excited to join in on the fun and test our knowledge. Thanks for the information!</div></td>
+                    <td><textarea>1. Response to the customer:
+Subject: Re: Trivia Night
+
+Dear [Customer],
+
+Thank you for your interest in Tanksters' trivia nights! We're thrilled to hear that you and your friends are looking to join in on the fun. Here are the details you requested:
+
+- Trivia Night Schedule: Trivia nights at Tanksters are currently held every Thursday evening starting at 7:00 PM. 
+- Rules: Each trivia night consists of several rounds of questions covering a variety of topics. Teams can have a maximum of 6 members, and each question round will test your knowledge in different categories.
+- Prizes: Winners of each round can enjoy complimentary drinks or appetizers, and the overall winning team at the end of the night will receive a gift card to enjoy on their next visit.
+
+We look forward to having you and your friends join us for a night of friendly competition and fun! Please feel free to reach out if you have any further questions or need additional information.
+
+Cheers,
+Tanksters Brewery/Restaurant
+
+2. Type: Inquiry
+3. Action: Provide details on trivia night schedule, rules, and prizes.</textarea></td>
+                    <td><button>Send</button></td>
+                </tr>
+    
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>

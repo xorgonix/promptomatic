@@ -1,6 +1,10 @@
 document.getElementById('sendPrompt').addEventListener('click', sendPrompt);
 document.getElementById('breakdownPrompt').addEventListener('click', breakDownResponse);
 document.getElementById('getLastResponse').addEventListener('click', getLastResponseAsMarkdown);
+<<<<<<< HEAD
+=======
+document.getElementById('getGmailEmails').addEventListener('click', getGmailEmails);
+>>>>>>> 212d10544abd434bd16d41e4d51aa3720229a59f
 
 let previousPrompt = '';
 let previousResponse = '';
