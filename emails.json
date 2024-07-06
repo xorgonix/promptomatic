@@ -1,0 +1,191 @@
+{
+    "emails": [
+        {
+            "sender": "john.doe@example.com",
+            "subject": "Reservation Inquiry",
+            "message": "Hello, I would like to make a reservation for 4 people at Brewery-Red on Saturday evening. Can you confirm availability? Thanks.",
+            "business": "brewery-red"
+        },
+        {
+            "sender": "jane.smith@example.com",
+            "subject": "Menu Request",
+            "message": "Hi, could you please send me the current menu for The Barn? I have some dietary restrictions and want to check my options. Thank you.",
+            "business": "the barn"
+        },
+        {
+            "sender": "michael.brown@example.com",
+            "subject": "Complaint about Service",
+            "message": "Hello, I visited Tanksters last night and was disappointed with the service. The staff were slow and inattentive. Can someone address this issue?",
+            "business": "tanksters"
+        },
+        {
+            "sender": "lisa.williams@example.com",
+            "subject": "Job Application",
+            "message": "Hi, are you currently hiring at The Barn? I am interested in a server position and have 3 years of experience. Attached is my resume. Regards, Lisa.",
+            "business": "the barn"
+        },
+        {
+            "sender": "tom.jones@example.com",
+            "subject": "Event Booking",
+            "message": "Good day, I am looking to book a private event at Brewery-Red for about 20 people. Can you provide details on availability and pricing?",
+            "business": "brewery-red"
+        },
+        {
+            "sender": "susan.lee@example.com",
+            "subject": "Gift Card Purchase",
+            "message": "Hi, I would like to purchase a gift card for Tanksters. Can you tell me how to proceed with this? Thanks.",
+            "business": "tanksters"
+        },
+        {
+            "sender": "robert.miller@example.com",
+            "subject": "Brewery Tour Inquiry",
+            "message": "Hello, I am interested in taking a tour of Brewery-Red. Do you offer tours, and if so, what are the timings and cost?",
+            "business": "brewery-red"
+        },
+        {
+            "sender": "emily.johnson@example.com",
+            "subject": "Lost Item",
+            "message": "Hi, I left my jacket at The Barn last night. Has it been found? It’s a black leather jacket. Please let me know. Thank you.",
+            "business": "the barn"
+        },
+        {
+            "sender": "mark.anderson@example.com",
+            "subject": "Feedback on Food",
+            "message": "Good evening, I recently dined at Tanksters and wanted to give feedback on the food. The burger was excellent, but the fries were cold. Overall, a good experience. Best, Mark.",
+            "business": "tanksters"
+        },
+        {
+            "sender": "nancy.wilson@example.com",
+            "subject": "Special Dietary Needs",
+            "message": "Hi, I have a gluten allergy and plan to visit The Barn. Can you accommodate gluten-free meals? Please advise. Thanks.",
+            "business": "the barn"
+        },
+        {
+            "sender": "john.doe@example.com",
+            "subject": "Reservation Inquiry",
+            "message": "Hello, I would like to make a reservation for 4 people at Brewery-Red on Saturday evening. We are celebrating a special occasion and would love to have a table with a nice view if possible. Can you confirm availability and let me know if there are any special arrangements you can provide for birthdays? Thanks in advance!",
+            "business": "brewery-red"
+        },
+        {
+            "sender": "jane.smith@example.com",
+            "subject": "Menu Request",
+            "message": "Hi, could you please send me the current menu for The Barn? I have some dietary restrictions, specifically I am gluten-intolerant and lactose-intolerant, and I want to check my options before visiting. If you have any recommendations for gluten-free and dairy-free dishes, that would be greatly appreciated. Thank you so much for your assistance.",
+            "business": "the barn"
+        },
+        {
+            "sender": "michael.brown@example.com",
+            "subject": "Complaint about Service",
+            "message": "Hello, I visited Tanksters last night with a group of friends and was disappointed with the service we received. The staff were slow and inattentive, and our orders were mixed up multiple times. Additionally, it took an unusually long time to get our drinks, and when they arrived, they were not prepared correctly. I hope you can address this issue to improve the experience for future customers.",
+            "business": "tanksters"
+        },
+        {
+            "sender": "lisa.williams@example.com",
+            "subject": "Job Application",
+            "message": "Hi, are you currently hiring at The Barn? I am interested in a server position and have 3 years of experience in the hospitality industry. I am passionate about providing excellent customer service and have a strong work ethic. Attached is my resume and cover letter. I look forward to the possibility of joining your team. Regards, Lisa.",
+            "business": "the barn"
+        },
+        {
+            "sender": "tom.jones@example.com",
+            "subject": "Event Booking",
+            "message": "Good day, I am looking to book a private event at Brewery-Red for about 20 people to celebrate a company milestone. Could you provide details on availability, pricing, and the menu options for a group of this size? Additionally, we would like to know if there are any special packages or discounts available for corporate events. Thank you for your time and assistance.",
+            "business": "brewery-red"
+        },
+        {
+            "sender": "susan.lee@example.com",
+            "subject": "Gift Card Purchase",
+            "message": "Hi, I would like to purchase a gift card for Tanksters as a birthday present for a friend. Could you please let me know the denominations available and the process for purchasing one? Is it possible to buy a digital gift card online, or do I need to visit the restaurant in person? Thank you for your help.",
+            "business": "tanksters"
+        },
+        {
+            "sender": "robert.miller@example.com",
+            "subject": "Brewery Tour Inquiry",
+            "message": "Hello, I am interested in taking a tour of Brewery-Red with a group of friends. Do you offer guided tours, and if so, what are the timings and cost? We are particularly interested in learning about the brewing process and sampling some of your beers. Any additional information about the tour would be appreciated. Thank you.",
+            "business": "brewery-red"
+        },
+        {
+            "sender": "emily.johnson@example.com",
+            "subject": "Lost Item",
+            "message": "Hi, I left my jacket at The Barn last night and I am hoping it has been found. It’s a black leather jacket with a silver zipper and some distinctive stitching on the back. I would really appreciate it if you could check your lost and found and let me know if it has been turned in. Thank you for your assistance.",
+            "business": "the barn"
+        },
+        {
+            "sender": "mark.anderson@example.com",
+            "subject": "Feedback on Food",
+            "message": "Good evening, I recently dined at Tanksters and wanted to provide some feedback on the food. The burger I ordered was excellent, very juicy and flavorful, but the fries were unfortunately cold and lacked seasoning. Overall, it was a good experience, but I hope the kitchen can address the issue with the fries to ensure all elements of the meal are served at the same high standard. Best, Mark.",
+            "business": "tanksters"
+        },
+        {
+            "sender": "nancy.wilson@example.com",
+            "subject": "Special Dietary Needs",
+            "message": "Hi, I have a gluten allergy and am planning to visit The Barn with some friends. Can you accommodate gluten-free meals? If so, could you please provide me with a list of gluten-free options available on your menu? It would be very helpful to know in advance to ensure I can enjoy my meal without any concerns. Thanks for your understanding and assistance.",
+            "business": "the barn"
+        },
+        {
+            "sender": "daniel.evans@example.com",
+            "subject": "Live Music Schedule",
+            "message": "Hello, I heard that Brewery-Red often hosts live music events and I am very interested in attending. Could you provide me with the upcoming schedule for live music performances? Additionally, do you offer any special deals or packages for these events? I would love to plan a visit around one of your music nights. Thank you!",
+            "business": "brewery-red"
+        },
+        {
+            "sender": "sarah.martin@example.com",
+            "subject": "Birthday Celebration",
+            "message": "Hi, I am planning a birthday celebration for a friend at Tanksters and wanted to inquire about any special arrangements or packages you offer for such events. We are a group of about 10 people and would love to have a memorable experience. Please let me know what options are available. Thank you.",
+            "business": "tanksters"
+        },
+        {
+            "sender": "peter.wilson@example.com",
+            "subject": "Catering Services",
+            "message": "Good day, I am interested in your catering services for an upcoming family reunion. We are expecting around 50 guests and would like to know if you provide catering for such events. If so, could you please send me a menu and pricing details? We would like a variety of dishes to accommodate different tastes and dietary needs. Thank you.",
+            "business": "the barn"
+        },
+        {
+            "sender": "amy.baker@example.com",
+            "subject": "Beer Recommendations",
+            "message": "Hello, I recently visited Brewery-Red and enjoyed a few of your beers. I was particularly fond of one of the IPAs but can't recall the name. Could you provide me with a list of your current IPA offerings and recommend a few that have a similar flavor profile? I would love to purchase some for home. Thanks!",
+            "business": "brewery-red"
+        },
+        {
+            "sender": "jason.davis@example.com",
+            "subject": "Private Party Inquiry",
+            "message": "Hi, I am organizing a private party for a group of colleagues and am considering Tanksters as the venue. Could you provide information on booking a private area, the available food and drink packages, and any additional services you offer for such events? We are aiming for a relaxed and enjoyable atmosphere. Thank you.",
+            "business": "tanksters"
+        },
+        {
+            "sender": "laura.harris@example.com",
+            "subject": "Accessibility Information",
+            "message": "Hello, I am planning to visit The Barn with a family member who uses a wheelchair. Could you please provide information on the accessibility of your restaurant? Are there ramps, accessible restrooms, and suitable seating options available? Your assistance in ensuring we have a comfortable visit would be greatly appreciated. Thank you.",
+            "business": "the barn"
+        },
+        {
+            "sender": "steven.wright@example.com",
+            "subject": "Seasonal Beers",
+            "message": "Hi, I am a big fan of seasonal beers and wanted to inquire if Brewery-Red has any special brews for the upcoming fall season. I am particularly interested in pumpkin ales or other unique seasonal flavors. Could you provide a list of what will be available and when? Thank you for your time.",
+            "business": "brewery-red"
+        },
+        {
+            "sender": "rebecca.taylor@example.com",
+            "subject": "Vegan Options",
+            "message": "Hello, I am planning a visit to Tanksters with a group of friends, and one of us is vegan. Could you please let me know if you have vegan options on your menu or if any dishes can be modified to be vegan? It would help us plan our visit better knowing what is available. Thank you very much.",
+            "business": "tanksters"
+        },
+        {
+            "sender": "brian.walker@example.com",
+            "subject": "Event Sponsorship",
+            "message": "Hi, I am organizing a community event in Kingston and am seeking local businesses to sponsor or participate. Would Brewery-Red be interested in sponsoring our event or providing some of your products for a tasting session? Any support would be greatly appreciated and we would promote your business as a partner in all our materials. Thank you for considering this request.",
+            "business": "brewery-red"
+        },
+        {
+            "sender": "julia.hernandez@example.com",
+            "subject": "Wine List",
+            "message": "Hi, I am planning to visit The Barn and wanted to know if you have a wine list available. Could you please send me the current wine list or let me know if there are any special wines you would recommend? We are looking to have a nice dinner with a good bottle of wine. Thank you.",
+            "business": "the barn"
+        },
+        {
+            "sender": "david.king@example.com",
+            "subject": "Trivia Night",
+            "message": "Hello, I heard that Tanksters hosts trivia nights and would love to participate with my friends. Could you provide details on the schedule for trivia nights, the rules, and any prizes that are awarded? We are excited to join in on the fun and test our knowledge. Thanks for the information!",
+            "business": "tanksters"
+        }
+    ]
+}
+

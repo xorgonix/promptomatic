@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asherah Network</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis-network.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis-network.min.css">
+    <style>
+        body {
+            background-color: #222222;
+            color: white;
+            font-family: 'Arial', sans-serif;
+        }
+        #network {
+            width: 100%;
+            height: 750px;
+            border: 1px solid lightgray;
+        }
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .feedback {
+            margin-top: 20px;
+        }
+        details {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <h1>Asherah Network</h1>
+        <p>Select the subgraphs you want to display:</p>
+        <details open>
+            <summary>Toggle Subgraphs</summary>
+            <div class="checkbox-group">
+                <label><input type="checkbox" value="Ancient Cultures" onchange="toggleSubgraph(this)" checked> Ancient Cultures</label>
+                <label><input type="checkbox" value="Canaanite and Israelite Religion" onchange="toggleSubgraph(this)" checked> Canaanite and Israelite Religion</label>
+                <label><input type="checkbox" value="Key Points and Implications" onchange="toggleSubgraph(this)" checked> Key Points and Implications</label>
+                <label><input type="checkbox" value="Conclusion" onchange="toggleSubgraph(this)" checked> Conclusion</label>
+                <label><input type="checkbox" value="Talking Points for a Cocktail Party" onchange="toggleSubgraph(this)" checked> Talking Points for a Cocktail Party</label>
+            </div>
+        </details>
+        <div id="network"></div>
+        <div class="feedback" id="feedback"></div>
+        <button id="downloadBtn">Download Chart as Image</button>
+        <button id="downloadHtmlBtn">Download Chart as HTML</button>
+        <dialog id="nodeModal">
+            <article>
+                <header>
+                    <button aria-label="Close" rel="prev"></button>
+                    <h3 id="modalTitle">Node Title</h3>
+                </header>
+                <p id="modalDescription">Node Description</p>
+            </article>
+        </dialog>
+    </main>
+    <script src="modal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script>
+        var nodes = new vis.DataSet({{ nodes | tojson }});
+        var edges = new vis.DataSet({{ edges | tojson }});
+
+        var container = document.getElementById('network');
+        var data = {
+            nodes: nodes,
+            edges: edges
+        };
+        var options = {
+            nodes: {
+                shape: 'dot',
+                size: 10,
+                font: {
+                    size: 14,
+                    color: '#ffffff'
+                },
+                borderWidth: 2
+            },
+            edges: {
+                width: 2,
+                color: { inherit: 'from' },
+                smooth: { type: 'continuous' }
+            },
+            interaction: {
+                navigationButtons: true,
+                keyboard: true
+            },
+            physics: {
+                enabled: true
+            }
+        };
+        var network = new vis.Network(container, data, options);
+
+        network.on("doubleClick", function(params) {
+            if (params.nodes.length > 0) {
+                var nodeId = params.nodes[0];
+                var node = nodes.get(nodeId);
+                showModal(node.label, node.description);
+            }
+        });
+
+        function showModal(title, description) {
+            var modal = document.getElementById('nodeModal');
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalDescription').innerText = description;
+            openModal(modal);
+        }
+
+        document.querySelector('dialog button[aria-label="Close"]').addEventListener('click', function() {
+            var modal = document.getElementById('nodeModal');
+            closeModal(modal);
+        });
+
+        function toggleSubgraph(checkbox) {
+            var group = checkbox.value;
+            var updateArray = nodes.get({
+                filter: function (item) {
+                    return item.group === group;
+                }
+            }).map(function (node) {
+                return { id: node.id, hidden: !checkbox.checked };
+            });
+            nodes.update(updateArray);
+            document.getElementById('feedback').innerText = group + ' visibility ' + (checkbox.checked ? 'enabled' : 'disabled') + '.';
+        }
+
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            html2canvas(document.querySelector('#network')).then(canvas => {
+                let link = document.createElement('a');
+                link.download = 'chart.png';
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+        });
+
+        document.getElementById('downloadHtmlBtn').addEventListener('click', function() {
+            let networkElement = document.getElementById('network').outerHTML;
+            let htmlContent = `
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Chart</title>
+                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis-network.min.js"></script>
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis-network.min.css">
+            </head>
+            <body>
+                ${networkElement}
+            </body>
+            </html>`;
+            
+            let blob = new Blob([htmlContent], { type: 'text/html' });
+            let link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'chart.html';
+            link.click();
+        });
+    </script>
+</body>
+</html>

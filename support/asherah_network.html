@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asherah Network</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis-network.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis-network.min.css">
+    <style>
+        body {
+            background-color: #222222;
+            color: white;
+            font-family: 'Arial', sans-serif;
+        }
+        #network {
+            width: 100%;
+            height: 750px;
+            border: 1px solid lightgray;
+        }
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .feedback {
+            margin-top: 20px;
+        }
+        details {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <h1>Asherah Network</h1>
+        <p>Select the subgraphs you want to display:</p>
+        <details open>
+            <summary>Toggle Subgraphs</summary>
+            <div class="checkbox-group">
+                
+                    <label><input type="checkbox" value="Personal Information" onchange="toggleSubgraph(this)" checked> Personal Information</label>
+                
+            </div>
+        </details>
+        <div id="network"></div>
+        <div class="feedback" id="feedback"></div>
+        <dialog id="nodeModal">
+            <article>
+                <header>
+                    <button aria-label="Close" rel="prev"></button>
+                    <h3 id="modalTitle">Node Title</h3>
+                </header>
+                <p id="modalDescription">Node Description</p>
+            </article>
+        </dialog>
+    </main>
+    <script src="modal.js"></script>
+    <script>
+        var nodes = new vis.DataSet([{"color": "#0000FF", "description": "", "group": "Personal Information", "id": "Personal Information", "label": "Personal Information"}, {"color": "#00FF00", "description": "", "group": "Personal Information", "id": "Occupation", "label": "Occupation"}, {"color": "#FF5733", "description": "Jane Doe\u0027s profession", "group": "Personal Information", "id": "Jane Doe is a data scientist at XYZ Inc.", "label": "Jane Doe is a data scientist at XYZ Inc."}, {"color": "#FF5733", "description": "Jane\u0027s education", "group": "Personal Information", "id": "She has a PhD in Computer Science", "label": "She has a PhD in Computer Science"}, {"color": "#00FF00", "description": "", "group": "Personal Information", "id": "Focus", "label": "Focus"}, {"color": "#33FF57", "description": "Jane\u0027s specialization", "group": "Personal Information", "id": "Focuses on machine learning and artificial intelligence", "label": "Focuses on machine learning and artificial intelligence"}, {"color": "#00FF00", "description": "", "group": "Personal Information", "id": "Publications", "label": "Publications"}, {"color": "#3357FF", "description": "Jane\u0027s publications", "group": "Personal Information", "id": "Published several papers in prestigious journals", "label": "Published several papers in prestigious journals"}, {"color": "#3357FF", "description": "Jane\u0027s speaking engagements", "group": "Personal Information", "id": "Keynote speaker at industry conferences", "label": "Keynote speaker at industry conferences"}, {"color": "#00FF00", "description": "", "group": "Personal Information", "id": "Hobbies", "label": "Hobbies"}, {"color": "#FF33A6", "description": "Jane\u0027s hobby", "group": "Personal Information", "id": "Enjoys painting", "label": "Enjoys painting"}, {"color": "#FF33A6", "description": "Jane\u0027s hobby", "group": "Personal Information", "id": "Enjoys traveling", "label": "Enjoys traveling"}]);
+        var edges = new vis.DataSet([{"from": "Personal Information", "to": "Occupation"}, {"from": "Personal Information", "to": "Focus"}, {"from": "Personal Information", "to": "Publications"}, {"from": "Personal Information", "to": "Hobbies"}, {"from": "Occupation", "to": "Jane Doe is a data scientist at XYZ Inc."}, {"from": "Occupation", "to": "She has a PhD in Computer Science"}, {"from": "Focus", "to": "Focuses on machine learning and artificial intelligence"}, {"from": "Publications", "to": "Published several papers in prestigious journals"}, {"from": "Publications", "to": "Keynote speaker at industry conferences"}, {"from": "Hobbies", "to": "Enjoys painting"}, {"from": "Hobbies", "to": "Enjoys traveling"}]);
+
+        var container = document.getElementById('network');
+        var data = {
+            nodes: nodes,
+            edges: edges
+        };
+        var options = {
+            nodes: {
+                shape: 'dot',
+                size: 10,
+                font: {
+                    size: 14,
+                    color: '#ffffff'
+                },
+                borderWidth: 2
+            },
+            edges: {
+                width: 2,
+                color: { inherit: 'from' },
+                smooth: { type: 'continuous' }
+            },
+            interaction: {
+                navigationButtons: true,
+                keyboard: true
+            },
+            physics: {
+                enabled: true
+            }
+        };
+        var network = new vis.Network(container, data, options);
+
+        network.on("doubleClick", function(params) {
+            if (params.nodes.length > 0) {
+                var nodeId = params.nodes[0];
+                var node = nodes.get(nodeId);
+                showModal(node.label, node.description);
+            }
+        });
+
+        function showModal(title, description) {
+            var modal = document.getElementById('nodeModal');
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalDescription').innerText = description;
+            openModal(modal);
+        }
+
+        document.querySelector('dialog button[aria-label="Close"]').addEventListener('click', function() {
+            var modal = document.getElementById('nodeModal');
+            closeModal(modal);
+        });
+
+        function toggleSubgraph(checkbox) {
+            var group = checkbox.value;
+            var updateArray = nodes.get({
+                filter: function (item) {
+                    return item.group === group;
+                }
+            }).map(function (node) {
+                return { id: node.id, hidden: !checkbox.checked };
+            });
+            nodes.update(updateArray);
+            document.getElementById('feedback').innerText = group + ' visibility ' + (checkbox.checked ? 'enabled' : 'disabled') + '.';
+        }
+    </script>
+</body>
+</html>

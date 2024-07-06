@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown to JSON with Toast UI Editor</title>
+    <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="//cdn.jsdelivr.net/npm/jquery.fancytree@2.27/dist/skin-lion/ui.fancytree.min.css" rel="stylesheet">
+    <script src="//cdn.jsdelivr.net/npm/jquery.fancytree@2.27/dist/jquery.fancytree-all-deps.min.js"></script>
+    <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css">
+    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+    <style>
+        body {
+            background-color: #f0f0f0;
+        }
+
+        #tree {
+            background-color: white;
+            max-height: 500px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container">
+        <h1>Markdown to JSON with Toast UI Editor</h1>
+        <div id="editor"></div>
+        <button onclick="parseMarkdown()">Parse Markdown</button>
+        <button onclick="saveToFile()">Save to File</button>
+        <button onclick="loadFromFile()">Load JSON File</button>
+        <div id="tree"></div>
+    </main>
+
+    <script>
+        const editor = new toastui.Editor({
+            el: document.querySelector('#editor'),
+            height: '400px',
+            initialEditType: 'markdown',
+            previewStyle: 'vertical'
+        });
+
+        let treeData = [];
+
+        function parseMarkdown() {
+            const input = editor.getMarkdown();
+            const lines = input.split('\n');
+            treeData = convertMarkdownToTreeData(lines);
+            initializeTree(treeData);
+        }
+
+        function convertMarkdownToTreeData(lines) {
+            const treeData = [];
+            let currentNode = null;
+            let currentContent = '';
+
+            lines.forEach(line => {
+                const heading2Match = line.match(/^##\s+(.*)$/);
+                const heading3Match = line.match(/^###\s+(.*)$/);
+                const boldMatch = line.match(/^\*\*(.*?)\*\*$/);
+                const listItemMatch = line.match(/^-\s+|^\d+\.\s+/);
+
+                if (heading2Match) {
+                    if (currentNode) {
+                        currentNode.data = { content: currentContent.trim() };
+                        treeData.push(currentNode);
+                        currentContent = '';
+                    }
+                    currentNode = {
+                        title: heading2Match[1],
+                        folder: false,
+                        children: [],
+                        data: {}
+                    };
+                } else if (heading3Match) {
+                    currentContent += `### ${heading3Match[1]}\n\n`;
+                } else if (boldMatch) {
+                    currentContent += `**${boldMatch[1]}**\n\n`;
+                } else if (listItemMatch) {
+                    currentContent += line.trim() + '\n';
+                } else {
+                    const content = line.trim();
+                    if (content) {
+                        currentContent += content + '\n';
+                    }
+                }
+            });
+
+            if (currentNode) {
+                currentNode.data = { content: currentContent.trim() };
+                treeData.push(currentNode);
+            }
+
+            return treeData;
+        }
+
+        function initializeTree(data) {
+            $("#tree").fancytree({
+                extensions: ["filter"],
+                quicksearch: true,
+                source: data,
+                activate: function(event, data) {
+                    const node = data.node;
+                    if (node.data && node.data.content) {
+                        editor.setMarkdown(node.data.content);
+                    } else {
+                        editor.setMarkdown('');
+                    }
+                }
+            });
+        }
+
+        async function saveToFile() {
+            const options = {
+                types: [{
+                    description: 'JSON Files',
+                    accept: { 'application/json': ['.json'] },
+                }],
+                suggestedName: 'testout.json'
+            };
+            const handle = await window.showSaveFilePicker(options);
+            const writable = await handle.createWritable();
+            await writable.write(JSON.stringify(treeData, null, 2));
+            await writable.close();
+        }
+
+        async function loadFromFile() {
+            const [fileHandle] = await window.showOpenFilePicker();
+            const file = await fileHandle.getFile();
+            const text = await file.text();
+            let data;
+            try {
+                data = JSON.parse(text);
+            } catch (e) {
+                console.error("Error parsing JSON", e);
+                alert("Error parsing JSON: " + e.message);
+                return;
+            }
+            const rolledUpData = rollUpNodes(data);
+            initializeTree(rolledUpData);
+            await saveRolledUpJsonToFile(rolledUpData); // Save rolled-up JSON to file for verification
+        }
+
+        async function saveRolledUpJsonToFile(data) {
+            const options = {
+                types: [{
+                    description: 'JSON Files',
+                    accept: { 'application/json': ['.json'] },
+                }],
+                suggestedName: 'testout.json'
+            };
+            const handle = await window.showSaveFilePicker(options);
+            const writable = await handle.createWritable();
+            await writable.write(JSON.stringify(data, null, 2));
+            await writable.close();
+        }
+
+        function rollUpNodes(data) {
+            if (!Array.isArray(data)) {
+                console.error("Expected an array but got:", data);
+                alert("Invalid data format. Expected an array.");
+                return [];
+            }
+            return data.map(node => {
+                if (node.children && node.children.length > 0) {
+                    const rolledUpContent = node.children.map(child => rollUpNodeContent(child)).join('\n\n');
+                    return {
+                        title: node.title,
+                        folder: false,
+                        data: {
+                            content: `${node.title}\n\n${rolledUpContent}`
+                        }
+                    };
+                }
+                return node;
+            });
+        }
+
+        function rollUpNodeContent(node) {
+            if (node.children && node.children.length > 0) {
+                return `${node.title}\n\n` + node.children.map(child => rollUpNodeContent(child)).join('\n\n');
+            }
+            return node.data.content ? node.data.content : node.title;
+        }
+    </script>
+</body>
+
+</html>

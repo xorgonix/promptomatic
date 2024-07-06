@@ -1,0 +1,27 @@
+#responseOutput {
+    white-space: pre-wrap;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1.2em;
+    color: #333;
+}
+
+body {
+    width: 600px;
+    height: 600px;
+}
+
+.mde {
+    height: 300px;
+    font-size: 1.2em;
+}
+
+.EasyMDEContainer {
+    color: #333;
+}
+
+.editor-toolbar, .CodeMirror, .editor-preview, .editor-statusbar {
+    font-size: 1.2em;
+    color: #000;
+}

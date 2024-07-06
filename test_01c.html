@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown to Prompt Converter</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <style>
+        #output {
+            margin-top: 20px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        .prompt-container {
+            margin-bottom: 20px;
+        }
+        .scrollable-list {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        .scrollable-list button {
+            display: block;
+            width: 100%;
+            margin: 5px 0;
+            padding: 10px;
+            text-align: left;
+        }
+        #promptDisplay {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <h1>Markdown to Prompt Converter</h1>
+        <textarea id="markdownInput" placeholder="Paste your markdown text here..." rows="10"></textarea>
+        
+        <div>
+            <label><input type="radio" name="grouping" value="2"> Group by ##</label>
+            <label><input type="radio" name="grouping" value="3" checked> Group by ###</label>
+        </div>
+        
+        <button onclick="convertMarkdown()">Convert</button>
+        <div id="output"></div>
+        <div id="promptDisplay"></div>
+    </main>
+
+    <script>
+        function convertMarkdown() {
+            const input = document.getElementById('markdownInput').value;
+            const grouping = document.querySelector('input[name="grouping"]:checked').value;
+            console.log("Original Input:\n", input);
+
+            const lines = input.split('\n');
+            console.log("Split Lines:\n", lines);
+
+            let outputJson = {};
+            let currentKey = '';
+            let keys = [];
+
+            const numHashesToBreakOn = parseInt(grouping);  // Get the number of '#' characters to break on
+
+            lines.forEach(line => {
+                const headingMatch = line.match(new RegExp(`^#{${numHashesToBreakOn}}\\s+(.*)`));
+                if (headingMatch) {
+                    currentKey = headingMatch[1].trim();
+                    outputJson[currentKey] = [];
+                    keys.push(currentKey);
+                    console.log("Found Heading:", currentKey);
+                } else {
+                    if (line.trim() !== '' && currentKey) {
+                        outputJson[currentKey].push(line.trim());
+                        console.log("Added Paragraph to", currentKey + ":", line.trim());
+                    }
+                }
+            });
+
+            console.log("Generated JSON:\n", JSON.stringify(outputJson, null, 2));
+            console.log("Generated Keys:\n", keys);
+
+            const generateReportStructure = (keys) => {
+                let structure = `"report": {\n`;
+                keys.forEach(key => {
+                    structure += `    "${key}": {},\n`;
+                });
+                structure += `},\n"cocktail_party_talking_points": {}\n`;
+                return structure;
+            }
+
+            const reportStructure = generateReportStructure(keys);
+
+            const template = (key) => `
+You are a skilled writer, knowing how to make engaging content that captivates readers. 
+You have a deep understanding of the subject matter and can present it in a clear and concise manner. 
+Your writing is informative, engaging, and persuasive, drawing readers in and keeping them interested throughout. 
+You have a knack for storytelling, weaving together facts and anecdotes to create a compelling narrative. 
+Your writing is polished and professional, showcasing your expertise and authority on the topic. 
+Readers trust your content and look to you for valuable insights and information. 
+Your writing is a reflection of your passion for the subject matter, and it shines through in every word you write.
+
+Today, you will be going through a JSON document and converting it into a text format, node by node. Here is the template we will be using. 
+It represents the Table of Contents (TOC). As you write about each node, be sure to be aware of where you are in the document and let that guide your writing. 
+So, before you start, be sure to keep pertinent information in mind as you write about each node, and don’t overly repeat yourself.
+
+${reportStructure}
+
+For this particular prompt and using well-formed, attractive Markdown, I want you to expand a great deal on the content for the node titled "${key}":
+
+${key}
+`;
+
+            let outputHtml = '<div class="scrollable-list">';
+            let prompts = {};
+
+            for (const key in outputJson) {
+                if (outputJson.hasOwnProperty(key)) {
+                    const prompt = template(key) + outputJson[key].join('\n') + "\n======End======\n\n";
+                    prompts[key] = prompt;
+                    outputHtml += `<button onclick="showPrompt('${key}')">${key}</button>`;
+                }
+            }
+
+            outputHtml += '</div>';
+            console.log("Generated Prompts:\n", prompts);
+            document.getElementById('output').innerHTML = outputHtml;
+
+            window.prompts = prompts; // Store prompts globally to access in showPrompt function
+        }
+
+        function showPrompt(key) {
+            const prompt = window.prompts[key];
+            const promptDisplay = `
+                <div class="prompt-container">
+                    <textarea rows="10">${prompt}</textarea>
+                    <button onclick="copyToClipboard(this.previousElementSibling)">Copy</button>
+                </div>
+            `;
+            document.getElementById('promptDisplay').innerHTML = promptDisplay;
+        }
+
+        function copyToClipboard(textarea) {
+            textarea.select();
+            document.execCommand('copy');
+        }
+    </script>
+</body>
+</html>

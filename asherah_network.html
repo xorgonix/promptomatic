@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asherah Network</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis-network.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis-network.min.css">
+    <style>
+        body {
+            background-color: #222222;
+            color: white;
+            font-family: 'Arial', sans-serif;
+        }
+        #network {
+            width: 100%;
+            height: 750px;
+            border: 1px solid lightgray;
+        }
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .feedback {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <h1>Asherah Network</h1>
+        <p>Select the subgraphs you want to display:</p>
+        <div class="checkbox-group">
+            <label><input type="checkbox" value="Ancient Cultures" onchange="toggleSubgraph(this)"> Ancient Cultures</label>
+            <label><input type="checkbox" value="Canaanite and Israelite Religion" onchange="toggleSubgraph(this)"> Canaanite and Israelite Religion</label>
+            <label><input type="checkbox" value="Key Points and Implications" onchange="toggleSubgraph(this)"> Key Points and Implications</label>
+            <label><input type="checkbox" value="Conclusion" onchange="toggleSubgraph(this)"> Conclusion</label>
+            <label><input type="checkbox" value="Talking Points for a Cocktail Party" onchange="toggleSubgraph(this)"> Cocktail Party Points</label>
+        </div>
+        <div id="network"></div>
+        <div class="feedback" id="feedback"></div>
+    </main>
+    <script>
+        var nodes = new vis.DataSet([{"color": "#0000FF", "group": "Ancient Cultures", "id": "Ancient Cultures", "label": "Ancient Cultures"}, {"color": "#00FF00", "group": "Ancient Cultures", "id": "Mesopotamian Origins", "label": "Mesopotamian Origins"}, {"color": "#FF5733", "group": "Ancient Cultures", "id": "Known as Ashru or Ashum", "label": "Known as Ashru or Ashum"}, {"color": "#FF5733", "group": "Ancient Cultures", "id": "Consort of Amuru", "label": "Consort of Amuru"}, {"color": "#FF5733", "group": "Ancient Cultures", "id": "Highly venerated during the first Babylonian Dynasty", "label": "Highly venerated during the first Babylonian Dynasty"}, {"color": "#FF5733", "group": "Ancient Cultures", "id": "Had her own temple and priests", "label": "Had her own temple and priests"}, {"color": "#FF5733", "group": "Ancient Cultures", "id": "Amorite origins highlighted by her epithet \u0027Lady of the Steppe\u0027", "label": "Amorite origins highlighted by her epithet \u0027Lady of the Steppe\u0027"}, {"color": "#FF5733", "group": "Ancient Cultures", "id": "Associated with mountains", "label": "Associated with mountains"}, {"color": "#00FF00", "group": "Ancient Cultures", "id": "Spread and Influence", "label": "Spread and Influence"}, {"color": "#FF5733", "group": "Ancient Cultures", "id": "Worshipped across Hittite Empire, Syria, Mesopotamia, Southwestern Arabia", "label": "Worshipped across Hittite Empire, Syria, Mesopotamia, Southwestern Arabia"}, {"color": "#FF5733", "group": "Ancient Cultures", "id": "Known as Athirat in Ugarit", "label": "Known as Athirat in Ugarit"}, {"color": "#FF5733", "group": "Ancient Cultures", "id": "Consort of supreme god El", "label": "Consort of supreme god El"}, {"color": "#FF5733", "group": "Ancient Cultures", "id": "Bore title \u0027Creatrix of the Gods\u0027", "label": "Bore title \u0027Creatrix of the Gods\u0027"}, {"color": "#0000FF", "group": "Canaanite and Israelite Religion", "id": "Canaanite and Israelite Religion", "label": "Canaanite and Israelite Religion"}, {"color": "#00FF00", "group": "Canaanite and Israelite Religion", "id": "Integration into Israelite Worship", "label": "Integration into Israelite Worship"}, {"color": "#33FF57", "group": "Canaanite and Israelite Religion", "id": "Archaeological and textual evidence", "label": "Archaeological and textual evidence"}, {"color": "#33FF57", "group": "Canaanite and Israelite Religion", "id": "Symbols such as stylized trees or poles (asherim)", "label": "Symbols such as stylized trees or poles (asherim)"}, {"color": "#33FF57", "group": "Canaanite and Israelite Religion", "id": "Present in Jerusalem Temple", "label": "Present in Jerusalem Temple"}, {"color": "#33FF57", "group": "Canaanite and Israelite Religion", "id": "Iconography included fertility symbols", "label": "Iconography included fertility symbols"}, {"color": "#33FF57", "group": "Canaanite and Israelite Religion", "id": "Depicted as nourishing and blessing", "label": "Depicted as nourishing and blessing"}, {"color": "#00FF00", "group": "Canaanite and Israelite Religion", "id": "Biblical References and Changes", "label": "Biblical References and Changes"}, {"color": "#33FF57", "group": "Canaanite and Israelite Religion", "id": "Old Testament indirect references", "label": "Old Testament indirect references"}, {"color": "#33FF57", "group": "Canaanite and Israelite Religion", "id": "Cultic objects associated with her worship", "label": "Cultic objects associated with her worship"}, {"color": "#33FF57", "group": "Canaanite and Israelite Religion", "id": "Reformist narratives by Kings Asa and Josiah", "label": "Reformist narratives by Kings Asa and Josiah"}, {"color": "#33FF57", "group": "Canaanite and Israelite Religion", "id": "Efforts to remove Asherah worship", "label": "Efforts to remove Asherah worship"}, {"color": "#33FF57", "group": "Canaanite and Israelite Religion", "id": "Reflects later theological biases", "label": "Reflects later theological biases"}, {"color": "#0000FF", "group": "Key Points and Implications", "id": "Key Points and Implications", "label": "Key Points and Implications"}, {"color": "#00FF00", "group": "Key Points and Implications", "id": "Historical Significance", "label": "Historical Significance"}, {"color": "#3357FF", "group": "Key Points and Implications", "id": "Ugaritic texts evidence of Asherah\u0027s role", "label": "Ugaritic texts evidence of Asherah\u0027s role"}, {"color": "#3357FF", "group": "Key Points and Implications", "id": "Connection to the Israelite god El", "label": "Connection to the Israelite god El"}, {"color": "#3357FF", "group": "Key Points and Implications", "id": "Persistent worship despite reformist efforts", "label": "Persistent worship despite reformist efforts"}, {"color": "#00FF00", "group": "Key Points and Implications", "id": "Religious Integration", "label": "Religious Integration"}, {"color": "#3357FF", "group": "Key Points and Implications", "id": "Symbols integrated into Israelite practices", "label": "Symbols integrated into Israelite practices"}, {"color": "#3357FF", "group": "Key Points and Implications", "id": "Syncretic blending of beliefs", "label": "Syncretic blending of beliefs"}, {"color": "#3357FF", "group": "Key Points and Implications", "id": "Enduring influence of symbols like almond tree", "label": "Enduring influence of symbols like almond tree"}, {"color": "#00FF00", "group": "Key Points and Implications", "id": "Risks", "label": "Risks"}, {"color": "#FF33A6", "group": "Key Points and Implications", "id": "Misinterpretation of historical texts", "label": "Misinterpretation of historical texts"}, {"color": "#FF33A6", "group": "Key Points and Implications", "id": "Potential backlash from religious communities", "label": "Potential backlash from religious communities"}, {"color": "#00FF00", "group": "Key Points and Implications", "id": "Opportunities", "label": "Opportunities"}, {"color": "#FF33A6", "group": "Key Points and Implications", "id": "Richer insights into monotheistic traditions", "label": "Richer insights into monotheistic traditions"}, {"color": "#FF33A6", "group": "Key Points and Implications", "id": "New perspectives from archaeological discoveries", "label": "New perspectives from archaeological discoveries"}, {"color": "#0000FF", "group": "Conclusion", "id": "Conclusion", "label": "Conclusion"}, {"color": "#FF5733", "group": "Conclusion", "id": "Challenges traditional narratives of strict monotheism", "label": "Challenges traditional narratives of strict monotheism"}, {"color": "#FF5733", "group": "Conclusion", "id": "Reveals complex religious landscape", "label": "Reveals complex religious landscape"}, {"color": "#FF5733", "group": "Conclusion", "id": "Enduring symbols highlight her significant role", "label": "Enduring symbols highlight her significant role"}, {"color": "#FF5733", "group": "Conclusion", "id": "Provides deeper understanding of early religious beliefs", "label": "Provides deeper understanding of early religious beliefs"}, {"color": "#0000FF", "group": "Talking Points for a Cocktail Party", "id": "Talking Points for a Cocktail Party", "label": "Talking Points for a Cocktail Party"}, {"color": "#33FF57", "group": "Talking Points for a Cocktail Party", "id": "Introduction to Asherah", "label": "Introduction to Asherah"}, {"color": "#33FF57", "group": "Talking Points for a Cocktail Party", "id": "Significance of Ugaritic Texts", "label": "Significance of Ugaritic Texts"}, {"color": "#33FF57", "group": "Talking Points for a Cocktail Party", "id": "Integration into Israelite Religion", "label": "Integration into Israelite Religion"}, {"color": "#33FF57", "group": "Talking Points for a Cocktail Party", "id": "Biblical References", "label": "Biblical References"}, {"color": "#33FF57", "group": "Talking Points for a Cocktail Party", "id": "Reformist Movements", "label": "Reformist Movements"}, {"color": "#33FF57", "group": "Talking Points for a Cocktail Party", "id": "Enduring Symbols", "label": "Enduring Symbols"}, {"color": "#33FF57", "group": "Talking Points for a Cocktail Party", "id": "Modern Implications", "label": "Modern Implications"}]);
+        var edges = new vis.DataSet([{"from": "Ancient Cultures", "to": "Mesopotamian Origins"}, {"from": "Ancient Cultures", "to": "Spread and Influence"}, {"from": "Mesopotamian Origins", "to": "Known as Ashru or Ashum"}, {"from": "Mesopotamian Origins", "to": "Consort of Amuru"}, {"from": "Mesopotamian Origins", "to": "Highly venerated during the first Babylonian Dynasty"}, {"from": "Mesopotamian Origins", "to": "Had her own temple and priests"}, {"from": "Mesopotamian Origins", "to": "Amorite origins highlighted by her epithet \u0027Lady of the Steppe\u0027"}, {"from": "Mesopotamian Origins", "to": "Associated with mountains"}, {"from": "Spread and Influence", "to": "Worshipped across Hittite Empire, Syria, Mesopotamia, Southwestern Arabia"}, {"from": "Spread and Influence", "to": "Known as Athirat in Ugarit"}, {"from": "Spread and Influence", "to": "Consort of supreme god El"}, {"from": "Spread and Influence", "to": "Bore title \u0027Creatrix of the Gods\u0027"}, {"from": "Canaanite and Israelite Religion", "to": "Integration into Israelite Worship"}, {"from": "Canaanite and Israelite Religion", "to": "Biblical References and Changes"}, {"from": "Integration into Israelite Worship", "to": "Archaeological and textual evidence"}, {"from": "Integration into Israelite Worship", "to": "Symbols such as stylized trees or poles (asherim)"}, {"from": "Integration into Israelite Worship", "to": "Present in Jerusalem Temple"}, {"from": "Integration into Israelite Worship", "to": "Iconography included fertility symbols"}, {"from": "Integration into Israelite Worship", "to": "Depicted as nourishing and blessing"}, {"from": "Biblical References and Changes", "to": "Old Testament indirect references"}, {"from": "Biblical References and Changes", "to": "Cultic objects associated with her worship"}, {"from": "Biblical References and Changes", "to": "Reformist narratives by Kings Asa and Josiah"}, {"from": "Biblical References and Changes", "to": "Efforts to remove Asherah worship"}, {"from": "Biblical References and Changes", "to": "Reflects later theological biases"}, {"from": "Key Points and Implications", "to": "Historical Significance"}, {"from": "Key Points and Implications", "to": "Religious Integration"}, {"from": "Key Points and Implications", "to": "Risks"}, {"from": "Key Points and Implications", "to": "Opportunities"}, {"from": "Historical Significance", "to": "Ugaritic texts evidence of Asherah\u0027s role"}, {"from": "Historical Significance", "to": "Connection to the Israelite god El"}, {"from": "Historical Significance", "to": "Persistent worship despite reformist efforts"}, {"from": "Religious Integration", "to": "Symbols integrated into Israelite practices"}, {"from": "Religious Integration", "to": "Syncretic blending of beliefs"}, {"from": "Religious Integration", "to": "Enduring influence of symbols like almond tree"}, {"from": "Risks", "to": "Misinterpretation of historical texts"}, {"from": "Risks", "to": "Potential backlash from religious communities"}, {"from": "Opportunities", "to": "Richer insights into monotheistic traditions"}, {"from": "Opportunities", "to": "New perspectives from archaeological discoveries"}, {"from": "Conclusion", "to": "Challenges traditional narratives of strict monotheism"}, {"from": "Conclusion", "to": "Reveals complex religious landscape"}, {"from": "Conclusion", "to": "Enduring symbols highlight her significant role"}, {"from": "Conclusion", "to": "Provides deeper understanding of early religious beliefs"}, {"from": "Talking Points for a Cocktail Party", "to": "Introduction to Asherah"}, {"from": "Talking Points for a Cocktail Party", "to": "Significance of Ugaritic Texts"}, {"from": "Talking Points for a Cocktail Party", "to": "Integration into Israelite Religion"}, {"from": "Talking Points for a Cocktail Party", "to": "Biblical References"}, {"from": "Talking Points for a Cocktail Party", "to": "Reformist Movements"}, {"from": "Talking Points for a Cocktail Party", "to": "Enduring Symbols"}, {"from": "Talking Points for a Cocktail Party", "to": "Modern Implications"}]);
+
+        var container = document.getElementById('network');
+        var data = {
+            nodes: nodes,
+            edges: edges
+        };
+        var options = {
+            nodes: {
+                shape: 'dot',
+                size: 10,
+                font: {
+                    size: 14,
+                    color: '#ffffff'
+                },
+                borderWidth: 2
+            },
+            edges: {
+                width: 2,
+                color: { inherit: 'from' },
+                smooth: { type: 'continuous' }
+            },
+            interaction: {
+                navigationButtons: true,
+                keyboard: true
+            },
+            physics: {
+                enabled: true
+            }
+        };
+        var network = new vis.Network(container, data, options);
+
+        function toggleSubgraph(checkbox) {
+            var group = checkbox.value;
+            var updateArray = nodes.get({
+                filter: function (item) {
+                    return item.group === group;
+                }
+            }).map(function (node) {
+                return { id: node.id, hidden: !checkbox.checked };
+            });
+            nodes.update(updateArray);
+            document.getElementById('feedback').innerText = group + ' visibility ' + (checkbox.checked ? 'enabled' : 'disabled') + '.';
+        }
+    </script>
+</body>
+</html>

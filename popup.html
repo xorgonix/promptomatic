@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Engine</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css">
+    <link rel="stylesheet" href="style/style.css" />
+</head>
+
+<body>
+    <main class="container">
+        <h1>Prompt Engine</h1>
+        <form>
+            <label for="promptInput">Enter Prompt:</label>
+            <textarea id="promptInput" rows="4"></textarea>
+            <label for="autoSubmit">
+                <input type="checkbox" id="autoSubmit">
+                Submit Immediately
+            </label>
+            <button type="button" id="sendPrompt">Send Prompt</button>
+            <button type="button" id="getLastResponse">Get Last Response</button>
+            <button type="button" id="breakdownPrompt" style="display: none;">Break Down Response</button>
+            <button type="button" id="getgmail" >Get Email </button>
+        </form>
+        <h2>Last GPT Response:</h2>
+        <div id="responseOutput">No response found in storage.</div>
+        <div id="detailedPrompts" style="display: none;"></div>
+        <h2>Markdown Editor:</h2>
+        <textarea id="markdown-editor" class="mde"></textarea>
+    </main>
+
+    <script src="js/turndown.min.js"></script>
+    <script src="js/easymde.min.js"></script>
+    <script src="js/popup.js"></script>
+
+    <script>
+        var easyMDE = new EasyMDE({ element: document.getElementById("markdown-editor") });
+    </script>
+</body>
+
+</html>

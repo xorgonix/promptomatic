@@ -1,0 +1,33 @@
+# Node modules
+node_modules/
+
+# Log files
+*.log
+
+# Directory for built dist files
+/dist
+
+# Environment files
+.env
+
+# IDE settings
+.idea/
+.vscode/
+*.sublime*
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional artifacts
+*.tgz
+*.zip
+
+# System Files
+.DS_Store
+Thumbs.db
+
+credentials.json
+token.json

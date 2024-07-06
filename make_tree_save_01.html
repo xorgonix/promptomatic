@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown to Tree Viewer</title>
+    <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://xxcode.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link href="//cdn.jsdelivr.net/npm/jquery.fancytree@2.27/dist/skin-lion/ui.fancytree.min.css" rel="stylesheet">
+    <script src="//cdn.jsdelivr.net/npm/jquery.fancytree@2.27/dist/jquery.fancytree-all-deps.min.js"></script>
+    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+    <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
+    <link rel="stylesheet" href="style/dark.css" />
+    <style>
+        body {
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+ 
+        main.container {
+            display: flex;
+            flex-direction: row;
+            width: 90%;
+            margin-top: 20px;
+        }
+
+        #tree {
+            background-color: white;
+            max-height: 500px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-right: 20px;
+            flex: 1;
+        }
+
+        #editor {
+            background-color: white;
+            max-height: 500px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            flex: 1;
+        }
+
+        #markdownInput {
+            width: 90%;
+            height: 100px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Markdown to Tree Viewer</h1>
+    <textarea id="markdownInput" placeholder="Paste your markdown text here..."></textarea>
+    <button onclick="parseMarkdown()">Parse Markdown</button>
+    <button onclick="downloadJson()">Download JSON</button>
+    <main class="container">
+        <div id="tree"></div>
+        <div id="editor"></div>
+    </main>
+
+    <script>
+        let editor;
+        let activeNode = null;
+        let treeData = [];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            editor = new toastui.Editor({
+                el: document.querySelector('#editor'),
+                height: '500px',
+                initialEditType: 'wysiwyg',
+                previewStyle: 'tab',
+                theme: 'dark'
+            });
+
+            // Event listener for editor changes
+            editor.on('change', () => {
+                if (activeNode) {
+                    console.log('Before change:', activeNode.data.content);
+                    activeNode.data.content = editor.getMarkdown();
+                    console.log('After change:', activeNode.data.content);
+                    updateNodeInTreeData(treeData, activeNode.key, activeNode.data.content);
+                }
+            });
+        });
+
+        function parseMarkdown() {
+            const input = document.getElementById('markdownInput').value;
+            const lines = input.split('\n');
+            treeData = convertMarkdownToTreeData(lines);
+            $("#tree").fancytree({
+                extensions: ["filter"],
+                quicksearch: true,
+                source: treeData,
+                activate: function(event, data) {
+                    // Save the current editor content to the active node before switching
+                    if (activeNode) {
+                        console.log('Switching nodes. Saving content of previous node:', activeNode.key);
+                        activeNode.data.content = editor.getMarkdown();
+                        updateNodeInTreeData(treeData, activeNode.key, activeNode.data.content);
+                    }
+                    activeNode = data.node;
+                    if (activeNode.data.content) {
+                        editor.setMarkdown(activeNode.data.content);
+                    } else {
+                        editor.setMarkdown('');
+                    }
+                },
+                renderNode: function(event, data) {
+                    const node = data.node;
+                    if (node.data.content) {
+                        $(node.span).attr('title', node.title + "\n\n" + node.data.content);
+                    } else {
+                        $(node.span).attr('title', node.title);
+                    }
+
+                    // Add custom class based on node type
+                    if (node.folder) {
+                        $(node.span).addClass('fancytree-folder');
+                    } else {
+                        $(node.span).addClass('fancytree-document');
+                    }
+                }
+            });
+        }
+
+        function convertMarkdownToTreeData(lines) {
+            const root = {
+                title: "Report",
+                folder: true,
+                children: [],
+                key: "root",
+                data: {
+                    content: ""
+                }
+            };
+            const stack = [{ ...root, level: 0 }];
+
+            lines.forEach((line, index) => {
+                const headingMatch = line.match(/^(#+)\s+(.*)$/);
+                if (headingMatch) {
+                    const level = headingMatch[1].length;
+                    const title = headingMatch[2].trim();
+                    const node = {
+                        title: title,
+                        folder: true,
+                        children: [],
+                        key: `node_${index}`, // Assign a unique key
+                        data: {
+                            content: ""
+                        }
+                    };
+
+                    while (stack.length > 0 && stack[stack.length - 1].level >= level) {
+                        stack.pop();
+                    }
+
+                    if (stack.length > 0) {
+                        stack[stack.length - 1].children.push(node);
+                    }
+                    stack.push({ ...node, level: level });
+                } else {
+                    if (stack.length > 0 && line.trim() !== '') {
+                        const parent = stack[stack.length - 1];
+                        if (parent.data.content) {
+                            parent.data.content += '\n' + line.trim();
+                        } else {
+                            parent.data.content = line.trim();
+                        }
+                        parent.folder = false;
+                    }
+                }
+            });
+
+            return cleanTreeData(root.children);
+        }
+
+        function cleanTreeData(treeData) {
+            return treeData.filter(node => {
+                if (node.folder) {
+                    node.children = cleanTreeData(node.children);
+                    node.folder = node.children.length > 0;
+                }
+                return true;
+            });
+        }
+
+        function downloadJson() {
+            if (activeNode) {
+                console.log('Before download. Saving content of active node:', activeNode.key);
+                activeNode.data.content = editor.getMarkdown();
+                updateNodeInTreeData(treeData, activeNode.key, activeNode.data.content);
+            }
+
+            console.log('Tree Data:', JSON.stringify(treeData, null, 2)); // Log the entire tree data before downloading
+
+            const jsonString = JSON.stringify(treeData, null, 2);
+            const blob = new Blob([jsonString], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'treeData.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        function updateNodeInTreeData(treeData, key, content) {
+            for (let i = 0; i < treeData.length; i++) {
+                if (treeData[i].key === key) {
+                    console.log(`Updating node ${key} with content:`, content);
+                    treeData[i].data.content = content;
+                    return;
+                }
+                if (treeData[i].children && treeData[i].children.length > 0) {
+                    updateNodeInTreeData(treeData[i].children, key, content);
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
