@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <title>Email Responses</title>
+    <style>
+        .email-box, textarea {
+            width: 100%;
+            height: auto;
+            min-height: 300px; /* This ensures a minimum height but allows the element to grow */
+            overflow: visible; /* Ensure content is visible without scrolling */
+            resize: none; /* Prevent manual resizing */
+            box-sizing: border-box;
+        }
+        .email-box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            white-space: pre-wrap; /* Ensure the text wraps */
+            word-wrap: break-word; /* Ensure long words break correctly */
+        }
+        table {
+            width: 100%;
+        }
+        td, th {
+            width: 50%; /* AI response column width */
+        }
+        td:first-child, th:first-child {
+            width: 37.5%; /* Original email column width */
+        }
+        td:last-child, th:last-child {
+            width: 12.5%; /* Action column width */
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <h1>Email Responses</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Original Email</th>
+                    <th>AI Suggested Response</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td><div class="email-box">From: john.doe@example.com
+Subject: Reservation Inquiry
+Message: Hello, I would like to make a reservation for 4 people at Brewery-Red on Saturday evening. Can you confirm availability? Thanks.</div></td>
+                    <td><textarea>To: john.doe@example.com
+Subject: Re: Reservation Inquiry
+
+Dear John, Thank you for reaching out to Brewery-Red for your reservation inquiry. We currently have availability for 4 people on Saturday evening. Would you like to proceed with the reservation? Please let us know your preferred time and any special requests. We look forward to hosting you at Brewery-Red!</textarea></td>
+                    <td><div>Type: Reservation</div><div>Action: Confirm_reservation</div><button>Send</button></td>
+                </tr>
+    
+                <tr>
+                    <td><div class="email-box">From: jane.smith@example.com
+Subject: Menu Request
+Message: Hi, could you please send me the current menu for The Barn? I have some dietary restrictions and want to check my options. Thank you.</div></td>
+                    <td><textarea>To: jane.smith@example.com
+Subject: Re: Menu Request
+
+Dear Jane Smith, Thank you for reaching out to us. We appreciate your interest in The Barn. I've attached a digital copy of our current menu to this email to help you review your dining options considering your dietary restrictions. If you need any further assistance or have specific questions about the menu items, feel free to let us know.</textarea></td>
+                    <td><div>Type: Inquiry</div><div>Action: Send_menu</div><button>Send</button></td>
+                </tr>
+    
+                <tr>
+                    <td><div class="email-box">From: michael.brown@example.com
+Subject: Complaint about Service
+Message: Hello, I visited Tanksters last night and was disappointed with the service. The staff were slow and inattentive. Can someone address this issue?</div></td>
+                    <td><textarea>To: michael.brown@example.com
+Subject: Re: Complaint about Service
+
+Dear Michael, Thank you for bringing your concerns to our attention. We are truly sorry to hear about your experience at Tanksters last night. This is not the level of service we strive to provide, and we appreciate your feedback. We would like to investigate this matter further and make it right. Could you please provide us with more details about your visit, such as the time, date, and any specific issues you encountered? Additionally, we would like to offer you a complimentary meal on your next visit as a gesture of goodwill. We hope to have the opportunity to restore your faith in our establishment. Best regards, The Tanksters Team</textarea></td>
+                    <td><div>Type: Complaint</div><div>Action: Investigate_issue, Offer_comp_meal</div><button>Send</button></td>
+                </tr>
+    
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>

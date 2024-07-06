@@ -1,6 +1,7 @@
 import json
 import time
 import openai
+import os
 
 # Set your OpenAI API key
 openai.api_key = os.getenv('OPENAI_API_KEY')
@@ -183,7 +184,7 @@ html_content += '''
 '''
 
 # Write the HTML content to a new file
-with open('emails_with_ai_responses.html', 'w') as f:
+with open('emails_with_ai_responses1.html', 'w') as f:
     f.write(html_content)
 
 print("Processing complete. Check 'emails_with_ai_responses.html' for results.")
